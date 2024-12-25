@@ -42,7 +42,8 @@
 		$this->RegisterVariableInteger("xclk", "XCLK MHz", "", 10);
 		$this->EnableAction("xclk");
 		
-		// Resulution
+		$this->RegisterVariableInteger("framesize", "Framesize", "", 20);
+		$this->EnableAction("framesize");
 		
 		$this->RegisterVariableInteger("quality", "Quality", "", 30);
 		$this->EnableAction("quality");
@@ -80,7 +81,35 @@
 		$this->RegisterVariableBoolean("agc", "AGC", "", 140);
 		$this->EnableAction("agc");
 
+   		$this->RegisterVariableInteger("gainceiling", "Gain Ceiling", "", 150);
+		$this->EnableAction("gainceiling");
 
+		$this->RegisterVariableBoolean("bpc", "BPC", "", 160);
+		$this->EnableAction("bpc");
+		
+    		$this->RegisterVariableBoolean("wpc", "WPC", "", 170);
+		$this->EnableAction("wpc");
+		
+		$this->RegisterVariableBoolean("raw_gma", "Raw GMA", "", 180);
+		$this->EnableAction("raw_gma");
+
+		$this->RegisterVariableBoolean("lenc", "Lens Correction", "", 190);
+		$this->EnableAction("lenc");
+
+		$this->RegisterVariableBoolean("hmirror", "H-Mirror", "", 200);
+		$this->EnableAction("hmirror");
+
+		// V-Flip
+		
+		$this->RegisterVariableBoolean("dcw", "DCW (Downsize EN)", "", 220);
+		$this->EnableAction("dcw");
+		
+		$this->RegisterVariableBoolean("colorbar", "Color Bar", "", 230);
+		$this->EnableAction("colorbar");
+
+		$this->RegisterVariableInteger("led_intensity", "LED Intensity", "", 240);
+		$this->EnableAction("led_intensity");
+    
 
 		
 		$this->RegisterVariableInteger("0xd3", "Register 0xd3", "", 10);
@@ -95,9 +124,6 @@
     		$this->RegisterVariableInteger("pixformat", "Pixformat", "", 50);
 		$this->EnableAction("pixformat");
 
-		$this->RegisterVariableInteger("framesize", "Framesize", "", 60);
-		$this->EnableAction("framesize");
-    
 		$this->RegisterVariableInteger("sharpness", "Sharpness", "", 110);
 		$this->EnableAction("sharpness");
 
@@ -107,33 +133,11 @@
     		$this->RegisterVariableInteger("agc_gain", "AGC Gain", "", 110);
 		$this->EnableAction("agc_gain");
     
-   		$this->RegisterVariableInteger("gainceiling", "gainceiling", "", 110);
-		$this->EnableAction("gainceiling");
 		
-    		$this->RegisterVariableInteger("bpc", "BPC", "", 110);
-		$this->EnableAction("bpc");
 		
-    		$this->RegisterVariableInteger("wpc", "WPC", "", 110);
-		$this->EnableAction("wpc");
+    		
 
-		$this->RegisterVariableInteger("raw_gma", "Raw GMA", "", 110);
-		$this->EnableAction("raw_gma");
-   
-    		$this->RegisterVariableInteger("lenc", "Lens Correction", "", 110);
-		$this->EnableAction("lenc");
-
-		$this->RegisterVariableInteger("hmirror", "H-Mirror", "", 110);
-		$this->EnableAction("hmirror");
-
-		$this->RegisterVariableInteger("dcw", "dcw", "", 110);
-		$this->EnableAction("dcw");
-    
-    		$this->RegisterVariableInteger("colorbar", "Color Bar", "", 110);
-		$this->EnableAction("colorbar");
-
-		$this->RegisterVariableInteger("led_intensity", "LED Intensity", "", 110);
-		$this->EnableAction("led_intensity");
-    
+		
     
 		
 		
