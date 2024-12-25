@@ -36,13 +36,25 @@
             	parent::ApplyChanges();
 		
 		// Profil anlegen
+		$this->RegisterProfileInteger("ESP32Cam.Framesize", "Image", "", "", 0, 12, 0);
+		IPS_SetVariableProfileAssociation("ESP32Cam.Framesize", 0, "THUMB (96x96)", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.Framesize", 1, "QQVGA (160x120)", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.Framesize", 3, "HQVGA (240x176)", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.Framesize", 5, "QVGA (320x240)", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.Framesize", 6, "CIF (400x296)", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.Framesize", 7, "HVGA (480x320)", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.Framesize", 8, "VGA (640x480)", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.Framesize", 9, "SVGA (800x600)", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.Framesize", 10, "XGA (1024x768)", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.Framesize", 11, "HD (1280x720)", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.Framesize", 12, "SXGA (1280x1024)", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.Framesize", 13, "UXGA (1600x1200)", "Image", -1);
 		
-	
 		// Statusvariablen
 		$this->RegisterVariableInteger("xclk", "XCLK MHz", "", 10);
 		$this->EnableAction("xclk");
 		
-		$this->RegisterVariableInteger("framesize", "Framesize", "", 20);
+		$this->RegisterVariableInteger("framesize", "Framesize", "ESP32Cam.Framesize", 20);
 		$this->EnableAction("framesize");
 		
 		$this->RegisterVariableInteger("quality", "Quality", "", 30);
@@ -195,7 +207,22 @@
 	}
 	
 	
-	
+	private function RegisterProfileInteger($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
+	{
+	        if (!IPS_VariableProfileExists($Name))
+	        {
+	            IPS_CreateVariableProfile($Name, 1);
+	        }
+	        else
+	        {
+	            $profile = IPS_GetVariableProfile($Name);
+	            if ($profile['ProfileType'] != 1)
+	                throw new Exception("Variable profile type does not match for profile " . $Name);
+	        }
+	        IPS_SetVariableProfileIcon($Name, $Icon);
+	        IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
+	        IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);    
+	}    
 
 }
 ?>
