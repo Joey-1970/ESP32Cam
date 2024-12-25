@@ -8,7 +8,7 @@
             	// Diese Zeile nicht löschen.
             	parent::Create();
  	    	$this->RegisterPropertyBoolean("Open", false);
-		
+		$this->RegisterPropertyString("IPAddress", "127.0.0.1");
         }
  	
 	public function GetConfigurationForm() 
@@ -20,7 +20,7 @@
 				
 		$arrayElements = array(); 
 		$arrayElements[] = array("name" => "Open", "type" => "CheckBox",  "caption" => "Aktiv"); 
-		
+		$arrayElements[] = array("type" => "ValidationTextBox", "name" => "IPAddress", "caption" => "IP");
  		
 		$arrayActions = array();
 		$arrayActions[] = array("type" => "Label", "label" => "Test Center"); 
@@ -71,7 +71,12 @@
 	}
 	    
 	// Beginn der Funktionen
-	
+	public function GetState
+	{
+		If ($this->ReadPropertyBoolean("Open") == true) {
+				
+		}
+	}
 	
 	
 	
