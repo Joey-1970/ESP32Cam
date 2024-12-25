@@ -39,7 +39,97 @@
 		
 	
 		// Statusvariablen
+		$this->RegisterVariableInteger("0xd3", "Register 0xd3", "", 10);
+		$this->EnableAction("0xd3");
+
+		$this->RegisterVariableInteger("0x111", "Register 0x111", "", 20);
+		$this->EnableAction("0x111");
+
+		$this->RegisterVariableInteger("0x132", "Register 0x132", "", 30);
+		$this->EnableAction("0x132");
+		 
+    		$this->RegisterVariableInteger("xclk", "xclk", "", 40);
+		$this->EnableAction("xclk");
+    
+    		$this->RegisterVariableInteger("pixformat", "Pixformat", "", 50);
+		$this->EnableAction("pixformat");
+
+		$this->RegisterVariableInteger("framesize", "Framesize", "", 60);
+		$this->EnableAction("framesize");
+    
+   		$this->RegisterVariableInteger("quality", "Quality", "", 70);
+		$this->EnableAction("quality");
+
+		$this->RegisterVariableInteger("brightness", "Brightness", "", 80);
+		$this->EnableAction("brightness");
+    
+    		$this->RegisterVariableInteger("contrast", "Contrast", "", 90);
+		$this->EnableAction("contrast");
+
+		$this->RegisterVariableInteger("saturation", "Saturation", "", 100);
+		$this->EnableAction("saturation");
+
+		$this->RegisterVariableInteger("sharpness", "Sharpness", "", 110);
+		$this->EnableAction("sharpness");
+
+		$this->RegisterVariableInteger("special_effect", "Special Effect", "", 110);
+		$this->EnableAction("special_effect");
+    
+    		$this->RegisterVariableInteger("wb_mode", "WB Mode", "", 110);
+		$this->EnableAction("wb_mode");
+    
+    		$this->RegisterVariableInteger("awb", "AWB", "", 110);
+		$this->EnableAction("awb");
+    
+    		$this->RegisterVariableInteger("awb_gain", "AWB Gain", "", 110);
+		$this->EnableAction("awb_gain");
+
+		$this->RegisterVariableInteger("aec", "AEC", "", 110);
+		$this->EnableAction("aec");
+
+		$this->RegisterVariableInteger("aec2", "AEC 2", "", 110);
+		$this->EnableAction("aec2");
 		
+    		$this->RegisterVariableInteger("ae_level", "ae_level", "", 110);
+		$this->EnableAction("ae_level");
+    
+    		$this->RegisterVariableInteger("aec_value", "aec_value", "", 110);
+		$this->EnableAction("aec_value");
+
+		$this->RegisterVariableInteger("agc", "AGC", "", 110);
+		$this->EnableAction("agc");
+
+    		$this->RegisterVariableInteger("agc_gain", "AGC Gain", "", 110);
+		$this->EnableAction("agc_gain");
+    
+   		$this->RegisterVariableInteger("gainceiling", "gainceiling", "", 110);
+		$this->EnableAction("gainceiling");
+		
+    		$this->RegisterVariableInteger("bpc", "BPC", "", 110);
+		$this->EnableAction("bpc");
+		
+    		$this->RegisterVariableInteger("wpc", "WPC", "", 110);
+		$this->EnableAction("wpc");
+
+		$this->RegisterVariableInteger("raw_gma", "Raw GMA", "", 110);
+		$this->EnableAction("raw_gma");
+   
+    		$this->RegisterVariableInteger("lenc", "Lens Correction", "", 110);
+		$this->EnableAction("lenc");
+
+		$this->RegisterVariableInteger("hmirror", "H-Mirror", "", 110);
+		$this->EnableAction("hmirror");
+
+		$this->RegisterVariableInteger("dcw", "dcw", "", 110);
+		$this->EnableAction("dcw");
+    
+    		$this->RegisterVariableInteger("colorbar", "Color Bar", "", 110);
+		$this->EnableAction("colorbar");
+
+		$this->RegisterVariableInteger("led_intensity", "LED Intensity", "", 110);
+		$this->EnableAction("led_intensity");
+    
+    
 		
 		
 		If ($this->HasActiveParent() == true) {	
