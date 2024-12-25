@@ -1,0 +1,12 @@
+{
+  "id": "{9241AE89-1EC6-4D07-A634-C936BC440BA3}",
+  "author": "Joachim Päper",
+  "name": "ESP32Cam",
+  "url": "www.ip-symcon.de",
+  "compatibility": {
+        "version": "5.1"
+  },
+  "version": "1.0",
+  "build": 0,
+  "date": 0
+}
