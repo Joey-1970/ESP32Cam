@@ -1,0 +1,14 @@
+{
+  "id": "{AE0DC81A-EF0E-C805-5949-3F13955CBF28}",
+  "name": "ESP32Cam",
+  "type": 3,
+  "vendor": "JP-IPS-Modules",
+  "aliases":
+  [
+    "ESP32Cam"
+  ],
+  "parentRequirements": [],
+  "childRequirements": [],
+  "implemented": [],
+  "prefix": "ESP32Cam"
+}
