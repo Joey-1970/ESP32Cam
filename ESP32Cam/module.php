@@ -111,7 +111,7 @@
 		$this->EnableAction("led_intensity");
     
 
-		
+		/*
 		$this->RegisterVariableInteger("0xd3", "Register 0xd3", "", 10);
 		$this->EnableAction("0xd3");
 
@@ -132,7 +132,7 @@
 
     		$this->RegisterVariableInteger("agc_gain", "AGC Gain", "", 110);
 		$this->EnableAction("agc_gain");
-    
+    		*/
 		
 		
     		
@@ -173,7 +173,23 @@
 	public function GetState
 	{
 		If ($this->ReadPropertyBoolean("Open") == true) {
-				
+			$IP = $this->ReadPropertyString("IPAddress");
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, 'http://'.$IP.'/status');
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			$Result = curl_exec($ch);
+			curl_close($ch);
+
+			If ($Result === false) {
+				//echo "Fehler";
+			}
+			else {
+				//echo $Result;
+                    	$Data = json_decode($Result);
+                    	//print_r($Data);
+                    	echo $Data->pixformat;
+                    	echo $Data->{'0xd3'};
+			}	
 		}
 	}
 	
