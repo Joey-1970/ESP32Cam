@@ -145,6 +145,7 @@
 			If ($this->ReadPropertyBoolean("Open") == true) {
 				If ($this->GetStatus() <> 102) {
 					$this->SetStatus(102);
+					$this->GetState();
 				}
 			}
 			else {
@@ -170,7 +171,7 @@
 	}
 	    
 	// Beginn der Funktionen
-	public function GetState
+	public function GetState()
 	{
 		If ($this->ReadPropertyBoolean("Open") == true) {
 			$IP = $this->ReadPropertyString("IPAddress");
@@ -184,11 +185,11 @@
 				//echo "Fehler";
 			}
 			else {
-				//echo $Result;
-                    	$Data = json_decode($Result);
-                    	//print_r($Data);
-                    	echo $Data->pixformat;
-                    	echo $Data->{'0xd3'};
+				$this->SendDebug("GetState", $Result, 0);
+                    		$Data = json_decode($Result);
+				$this->SetValue("xclk", $Data->{'xclk'});
+				$this->SetValue("framesize", $Data->{'framesize'});
+                    		
 			}	
 		}
 	}
