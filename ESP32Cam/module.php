@@ -39,6 +39,50 @@
 		
 	
 		// Statusvariablen
+		$this->RegisterVariableInteger("xclk", "XCLK MHz", "", 10);
+		$this->EnableAction("xclk");
+		
+		// Resulution
+		
+		$this->RegisterVariableInteger("quality", "Quality", "", 30);
+		$this->EnableAction("quality");
+
+		$this->RegisterVariableInteger("brightness", "Brightness", "", 40);
+		$this->EnableAction("brightness");
+
+		$this->RegisterVariableInteger("contrast", "Contrast", "", 50);
+		$this->EnableAction("contrast");
+
+		$this->RegisterVariableInteger("saturation", "Saturation", "", 60);
+		$this->EnableAction("saturation");
+
+		$this->RegisterVariableInteger("special_effect", "Special Effect", "", 70);
+		$this->EnableAction("special_effect");
+
+		$this->RegisterVariableBoolean("awb", "AWB", "", 80);
+		$this->EnableAction("awb");
+    
+    		$this->RegisterVariableBoolean("awb_gain", "AWB Gain", "", 90);
+		$this->EnableAction("awb_gain");
+
+		$this->RegisterVariableInteger("wb_mode", "WB Mode", "", 100);
+		$this->EnableAction("wb_mode");
+
+		$this->RegisterVariableBoolean("aec", "AEC Sensor", "", 110);
+		$this->EnableAction("aec");
+
+		$this->RegisterVariableBoolean("aec2", "AEC DSP", "", 120);
+		$this->EnableAction("aec2");
+
+		$this->RegisterVariableInteger("ae_level", "ae_level", "", 130);
+		$this->EnableAction("ae_level");
+
+		$this->RegisterVariableBoolean("agc", "AGC", "", 140);
+		$this->EnableAction("agc");
+
+
+
+		
 		$this->RegisterVariableInteger("0xd3", "Register 0xd3", "", 10);
 		$this->EnableAction("0xd3");
 
@@ -48,56 +92,17 @@
 		$this->RegisterVariableInteger("0x132", "Register 0x132", "", 30);
 		$this->EnableAction("0x132");
 		 
-    		$this->RegisterVariableInteger("xclk", "xclk", "", 40);
-		$this->EnableAction("xclk");
-    
     		$this->RegisterVariableInteger("pixformat", "Pixformat", "", 50);
 		$this->EnableAction("pixformat");
 
 		$this->RegisterVariableInteger("framesize", "Framesize", "", 60);
 		$this->EnableAction("framesize");
     
-   		$this->RegisterVariableInteger("quality", "Quality", "", 70);
-		$this->EnableAction("quality");
-
-		$this->RegisterVariableInteger("brightness", "Brightness", "", 80);
-		$this->EnableAction("brightness");
-    
-    		$this->RegisterVariableInteger("contrast", "Contrast", "", 90);
-		$this->EnableAction("contrast");
-
-		$this->RegisterVariableInteger("saturation", "Saturation", "", 100);
-		$this->EnableAction("saturation");
-
 		$this->RegisterVariableInteger("sharpness", "Sharpness", "", 110);
 		$this->EnableAction("sharpness");
 
-		$this->RegisterVariableInteger("special_effect", "Special Effect", "", 110);
-		$this->EnableAction("special_effect");
-    
-    		$this->RegisterVariableInteger("wb_mode", "WB Mode", "", 110);
-		$this->EnableAction("wb_mode");
-    
-    		$this->RegisterVariableInteger("awb", "AWB", "", 110);
-		$this->EnableAction("awb");
-    
-    		$this->RegisterVariableInteger("awb_gain", "AWB Gain", "", 110);
-		$this->EnableAction("awb_gain");
-
-		$this->RegisterVariableInteger("aec", "AEC", "", 110);
-		$this->EnableAction("aec");
-
-		$this->RegisterVariableInteger("aec2", "AEC 2", "", 110);
-		$this->EnableAction("aec2");
-		
-    		$this->RegisterVariableInteger("ae_level", "ae_level", "", 110);
-		$this->EnableAction("ae_level");
-    
     		$this->RegisterVariableInteger("aec_value", "aec_value", "", 110);
 		$this->EnableAction("aec_value");
-
-		$this->RegisterVariableInteger("agc", "AGC", "", 110);
-		$this->EnableAction("agc");
 
     		$this->RegisterVariableInteger("agc_gain", "AGC Gain", "", 110);
 		$this->EnableAction("agc_gain");
