@@ -183,7 +183,7 @@
 			}
 		}
 	}
-	
+
 	public function RequestAction($Ident, $Value) 
 	{
 		switch($Ident) {
@@ -241,7 +241,24 @@
 			}	
 		}
 	}
-	
+
+	public function GetCapture()
+	{
+		If ($this->ReadPropertyBoolean("Open") == true) {
+			$IP = $this->ReadPropertyString("IPAddress");
+			
+			if ($URL != null) { 
+              			$Content = file_get_contents(http://'.$IP.'/capture); 
+          		} else { 
+              			//$Content = file_get_contents(__DIR__ . '/../imgs/Pioneer.jpg'); 
+          		} 
+
+			IPS_SetMediaContent($this->GetIDForIdent("Capture_".$this->InstanceID), base64_encode($Content));  //Bild Base64 codieren und ablegen
+			IPS_SendMediaEvent($this->GetIDForIdent("Capture_".$this->InstanceID)); //aktualisieren
+		}
+	} 
+
+	    
 	private function RegisterMediaObject($Name, $Ident, $Typ, $Parent, $Position, $Cached, $Filename)
 	{
 		$MediaID = @$this->GetIDForIdent($Ident);
