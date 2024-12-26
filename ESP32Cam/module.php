@@ -225,6 +225,19 @@
 				$this->SetValue("awb", $Data->{'awb'});
 				$this->SetValue("awb_gain", $Data->{'awb_gain'});
 				$this->SetValue("wb_mode", $Data->{'wb_mode'});
+				$this->SetValue("aec", $Data->{'aec'});
+				$this->SetValue("aec2", $Data->{'aec2'});
+				$this->SetValue("ae_level", $Data->{'ae_level'});
+				$this->SetValue("agc", $Data->{'agc'});
+				$this->SetValue("gainceiling", $Data->{'gainceiling'});
+				$this->SetValue("bpc", $Data->{'bpc'});
+				$this->SetValue("wpc", $Data->{'wpc'});
+				$this->SetValue("raw_gma", $Data->{'raw_gma'});
+				$this->SetValue("lenc", $Data->{'lenc'});
+				$this->SetValue("hmirror", $Data->{'hmirror'});
+				$this->SetValue("dcw", $Data->{'dcw'});
+				$this->SetValue("colorbar", $Data->{'colorbar'});
+				$this->SetValue("led_intensity", $Data->{'led_intensity'});
 			}	
 		}
 	}
