@@ -252,16 +252,6 @@
 			$Content = curl_exec($ch);
 			curl_close($ch);
 			
-			/*
-			$IP = $this->ReadPropertyString("IPAddress");
-			$URL = 'http://'.$IP.'/capture';
-			if ($URL != null) { 
-              			$Content = file_get_contents($URL); 
-          		} else { 
-              			//$Content = file_get_contents(__DIR__ . '/../imgs/Pioneer.jpg'); 
-          		} 
-			*/
-			
 			IPS_SetMediaContent($this->GetIDForIdent("Capture_".$this->InstanceID), base64_encode($Content));  //Bild Base64 codieren und ablegen
 			IPS_SendMediaEvent($this->GetIDForIdent("Capture_".$this->InstanceID)); //aktualisieren
 		}
