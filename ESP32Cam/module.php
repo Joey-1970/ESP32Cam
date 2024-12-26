@@ -49,6 +49,16 @@
 		IPS_SetVariableProfileAssociation("ESP32Cam.Framesize", 11, "HD (1280x720)", "Image", -1);
 		IPS_SetVariableProfileAssociation("ESP32Cam.Framesize", 12, "SXGA (1280x1024)", "Image", -1);
 		IPS_SetVariableProfileAssociation("ESP32Cam.Framesize", 13, "UXGA (1600x1200)", "Image", -1);
+
+		$this->RegisterProfileInteger("ESP32Cam.SpecialEffect", "Image", "", "", 0, 6, 0);
+		IPS_SetVariableProfileAssociation("ESP32Cam.SpecialEffect", 0, "No Effect", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.SpecialEffect", 1, "Negative", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.SpecialEffect", 2, "Grayscale", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.SpecialEffect", 3, "Red Tint", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.SpecialEffect", 4, "Green Tint", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.SpecialEffect", 5, "Blue Tint", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.SpecialEffect", 6, "Sepia", "Image", -1);
+		
 		
 		// Statusvariablen
 		$this->RegisterVariableInteger("xclk", "XCLK MHz", "", 10);
@@ -69,7 +79,7 @@
 		$this->RegisterVariableInteger("saturation", "Saturation", "", 60);
 		$this->EnableAction("saturation");
 
-		$this->RegisterVariableInteger("special_effect", "Special Effect", "", 70);
+		$this->RegisterVariableInteger("special_effect", "Special Effect", "ESP32Cam.SpecialEffect", 70);
 		$this->EnableAction("special_effect");
 
 		$this->RegisterVariableBoolean("awb", "AWB", "", 80);
@@ -201,7 +211,12 @@
                     		$Data = json_decode($Result);
 				$this->SetValue("xclk", $Data->{'xclk'});
 				$this->SetValue("framesize", $Data->{'framesize'});
-                    		
+                    		$this->SetValue("quality", $Data->{'quality'});
+				$this->SetValue("brightness", $Data->{'brightness'});
+				$this->SetValue("contrast", $Data->{'contrast'});
+				$this->SetValue("saturation", $Data->{'saturation'});
+				$this->SetValue("special_effect", $Data->{'special_effect'});
+				$this->SetValue("awb", $Data->{'awb'});
 			}	
 		}
 	}
