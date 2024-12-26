@@ -164,7 +164,7 @@
 		
 		$this->RegisterMediaObject("Capture", "Capture_".$this->InstanceID, 1, $this->InstanceID, 300, true, "Capture.jpg");
     		
-
+		$this->RegisterVariableString("Stream", "Stream", "~HTMLBox", 310);
 		
     
 		
