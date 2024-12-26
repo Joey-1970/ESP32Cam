@@ -50,7 +50,7 @@
 		IPS_SetVariableProfileAssociation("ESP32Cam.Framesize", 12, "SXGA (1280x1024)", "Image", -1);
 		IPS_SetVariableProfileAssociation("ESP32Cam.Framesize", 13, "UXGA (1600x1200)", "Image", -1);
 
-		$this->RegisterProfileInteger("ESP32Cam.SpecialEffect", "Image", "", "", 0, 6, 0);
+		$this->RegisterProfileInteger("ESP32Cam.SpecialEffect", "Image", "", "", 0, 7, 0);
 		IPS_SetVariableProfileAssociation("ESP32Cam.SpecialEffect", 0, "No Effect", "Image", -1);
 		IPS_SetVariableProfileAssociation("ESP32Cam.SpecialEffect", 1, "Negative", "Image", -1);
 		IPS_SetVariableProfileAssociation("ESP32Cam.SpecialEffect", 2, "Grayscale", "Image", -1);
@@ -58,7 +58,13 @@
 		IPS_SetVariableProfileAssociation("ESP32Cam.SpecialEffect", 4, "Green Tint", "Image", -1);
 		IPS_SetVariableProfileAssociation("ESP32Cam.SpecialEffect", 5, "Blue Tint", "Image", -1);
 		IPS_SetVariableProfileAssociation("ESP32Cam.SpecialEffect", 6, "Sepia", "Image", -1);
-		
+
+		$this->RegisterProfileInteger("ESP32Cam.WBMode", "Image", "", "", 0, 5, 0);
+		IPS_SetVariableProfileAssociation("ESP32Cam.WBMode", 0, "Auto", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.WBMode", 1, "Sunny", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.WBMode", 2, "Cloudy", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.WBMode", 3, "Office", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.WBMode", 4, "Home", "Image", -1);
 		
 		// Statusvariablen
 		$this->RegisterVariableInteger("xclk", "XCLK MHz", "", 10);
@@ -88,7 +94,7 @@
     		$this->RegisterVariableBoolean("awb_gain", "AWB Gain", "", 90);
 		$this->EnableAction("awb_gain");
 
-		$this->RegisterVariableInteger("wb_mode", "WB Mode", "", 100);
+		$this->RegisterVariableInteger("wb_mode", "WB Mode", "ESP32Cam.WBMode", 100);
 		$this->EnableAction("wb_mode");
 
 		$this->RegisterVariableBoolean("aec", "AEC Sensor", "", 110);
@@ -217,6 +223,8 @@
 				$this->SetValue("saturation", $Data->{'saturation'});
 				$this->SetValue("special_effect", $Data->{'special_effect'});
 				$this->SetValue("awb", $Data->{'awb'});
+				$this->SetValue("awb_gain", $Data->{'awb_gain'});
+				$this->SetValue("wb_mode", $Data->{'wb_mode'});
 			}	
 		}
 	}
