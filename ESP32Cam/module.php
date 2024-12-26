@@ -135,7 +135,7 @@
 		$this->RegisterVariableBoolean("colorbar", "Color Bar", "", 230);
 		$this->EnableAction("colorbar");
 
-		$this->RegisterVariableInteger("led_intensity", "LED Intensity", "", 240);
+		$this->RegisterVariableInteger("led_intensity", "LED Intensity", "~Intensity.255", 240);
 		$this->EnableAction("led_intensity");
     
 
@@ -162,7 +162,7 @@
 		$this->EnableAction("agc_gain");
     		*/
 		
-		
+		$this->RegisterMediaObject("Capture", "Capture_".$this->InstanceID, 1, $this->InstanceID, 300, true, "Capture.jpg");
     		
 
 		
@@ -210,7 +210,7 @@
 			curl_close($ch);
 
 			If ($Result === false) {
-				//echo "Fehler";
+				$this->SendDebug("GetState", "Fehler beim Status-Update", 0);
 			}
 			else {
 				$this->SendDebug("GetState", $Result, 0);
@@ -242,7 +242,27 @@
 		}
 	}
 	
-	
+	private function RegisterMediaObject($Name, $Ident, $Typ, $Parent, $Position, $Cached, $Filename)
+	{
+		$MediaID = @$this->GetIDForIdent($Ident);
+		if($MediaID === false) {
+		    	$MediaID = 0;
+		}
+		
+		if ($MediaID == 0) {
+			 // Image im MedienPool anlegen
+			$MediaID = IPS_CreateMedia($Typ); 
+			// Medienobjekt einsortieren unter Kategorie $catid
+			IPS_SetParent($MediaID, $Parent);
+			IPS_SetIdent($MediaID, $Ident);
+			IPS_SetName($MediaID, $Name);
+			IPS_SetPosition($MediaID, $Position);
+                    	IPS_SetMediaCached($MediaID, $Cached);
+			$ImageFile = IPS_GetKernelDir()."media".DIRECTORY_SEPARATOR.$Filename;  // Image-Datei
+			IPS_SetMediaFile($MediaID, $ImageFile, false);    // Image im MedienPool mit Image-Datei verbinden
+		}  
+	}     
+	    
 	private function RegisterProfileInteger($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
 	{
 	        if (!IPS_VariableProfileExists($Name))
