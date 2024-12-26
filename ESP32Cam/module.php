@@ -248,7 +248,7 @@
 			$IP = $this->ReadPropertyString("IPAddress");
 			
 			if ($URL != null) { 
-              			$Content = file_get_contents(http://'.$IP.'/capture); 
+              			$Content = file_get_contents('http://'.$IP.'/capture'); 
           		} else { 
               			//$Content = file_get_contents(__DIR__ . '/../imgs/Pioneer.jpg'); 
           		} 
