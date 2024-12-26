@@ -246,7 +246,7 @@
 	{
 		If ($this->ReadPropertyBoolean("Open") == true) {
 			$IP = $this->ReadPropertyString("IPAddress");
-			$URL = 'http://'.$IP.'/status';
+			$URL = 'http://'.$IP.'/capture';
 			if ($URL != null) { 
               			$Content = file_get_contents($URL); 
           		} else { 
