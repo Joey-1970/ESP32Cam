@@ -257,6 +257,20 @@
 		}
 	} 
 
+	public function StartStream()
+	{
+		If ($this->ReadPropertyBoolean("Open") == true) {
+			$IP = $this->ReadPropertyString("IPAddress");
+			$this->SetValue("Stream", '<img src="http://'.$IP.':81/stream">');
+		}
+	} 
+
+	public function StopStream()
+	{
+		If ($this->ReadPropertyBoolean("Open") == true) {
+			$this->SetValue("Stream", "");
+		}
+	} 
 	    
 	private function RegisterMediaObject($Name, $Ident, $Typ, $Parent, $Position, $Cached, $Filename)
 	{
