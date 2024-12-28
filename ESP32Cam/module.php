@@ -73,6 +73,12 @@
 		
 		// Statusvariablen
 		$this->RegisterVariableInteger("State", "Status", "ESP32Cam.State", 5);
+
+		$this->RegisterVariableBoolean("GetCapture", "Bild erstellen", "", 7);
+		$this->EnableAction("GetCapture");
+
+		$this->RegisterVariableBoolean("GetStream", "Stream", "", 9);
+		$this->EnableAction("GetStream");
 		
 		$this->RegisterVariableInteger("xclk", "XCLK MHz", "", 10);
 		$this->EnableAction("xclk");
@@ -180,8 +186,8 @@
 			If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
 				If ($this->GetStatus() <> 102) {
 					$this->SetStatus(102);
-					$this->GetState();
 				}
+				$this->GetState();
 			}
 			else {
 				If ($this->GetStatus() <> 104) {
@@ -194,11 +200,21 @@
 	public function RequestAction($Ident, $Value) 
 	{
 		switch($Ident) {
-		case "ManuellSwitch":
-			$this->Switch($Value);
-			
+		case "GetCapture":
+			$this->SetValue("GetCapture", true);
+			$this->GetCapture();
+			$this->SetValue("GetCapture", false);
 			break;
-		
+		case "GetStream":
+			If ($Value == true) {
+				$this->StartStream();
+				$this->SetValue("GetStream", true);
+			}
+			else {
+				$this->StopStream();
+				$this->SetValue("GetStream", false);
+			}
+			break;
 	
 		default:
 		    throw new Exception("Invalid Ident");
@@ -261,6 +277,8 @@
 			
 			IPS_SetMediaContent($this->GetIDForIdent("Capture_".$this->InstanceID), base64_encode($Content));  //Bild Base64 codieren und ablegen
 			IPS_SendMediaEvent($this->GetIDForIdent("Capture_".$this->InstanceID)); //aktualisieren
+
+			$this->GetState();
 		}
 	} 
 
@@ -269,6 +287,8 @@
 		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
 			$IP = $this->ReadPropertyString("IPAddress");
 			$this->SetValue("Stream", '<img src="http://'.$IP.':81/stream">');
+
+			$this->GetState();
 		}
 	} 
 
@@ -276,6 +296,8 @@
 	{
 		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
 			$this->SetValue("Stream", "");
+
+			$this->GetState();
 		}
 	} 
 
