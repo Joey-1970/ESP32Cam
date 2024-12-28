@@ -36,6 +36,11 @@
             	parent::ApplyChanges();
 		
 		// Profil anlegen
+		$this->RegisterProfileInteger("ESP32Cam.State", "Network", "", "", 0, 3, 0);
+		IPS_SetVariableProfileAssociation("ESP32Cam.State", 0, "Online", "Network", 0x00FF00);
+		IPS_SetVariableProfileAssociation("ESP32Cam.State", 1, "Offline", "Network", 0xFF0000);
+		IPS_SetVariableProfileAssociation("ESP32Cam.State", 2, "Unbekannt", "Network", 0xFF0000);
+		
 		$this->RegisterProfileInteger("ESP32Cam.Framesize", "Image", "", "", 0, 12, 0);
 		IPS_SetVariableProfileAssociation("ESP32Cam.Framesize", 0, "THUMB (96x96)", "Image", -1);
 		IPS_SetVariableProfileAssociation("ESP32Cam.Framesize", 1, "QQVGA (160x120)", "Image", -1);
@@ -67,6 +72,8 @@
 		IPS_SetVariableProfileAssociation("ESP32Cam.WBMode", 4, "Home", "Image", -1);
 		
 		// Statusvariablen
+		$this->RegisterVariableBoolean("State", "Status", "ESP32Cam.State", 5);
+		
 		$this->RegisterVariableInteger("xclk", "XCLK MHz", "", 10);
 		$this->EnableAction("xclk");
 		
@@ -170,7 +177,7 @@
 		
 		
 		If ($this->HasActiveParent() == true) {	
-			If ($this->ReadPropertyBoolean("Open") == true) {
+			If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
 				If ($this->GetStatus() <> 102) {
 					$this->SetStatus(102);
 					$this->GetState();
@@ -201,7 +208,7 @@
 	// Beginn der Funktionen
 	public function GetState()
 	{
-		If ($this->ReadPropertyBoolean("Open") == true) {
+		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
 			$IP = $this->ReadPropertyString("IPAddress");
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, 'http://'.$IP.'/status');
@@ -244,7 +251,7 @@
 
 	public function GetCapture()
 	{
-		If ($this->ReadPropertyBoolean("Open") == true) {
+		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
 			$IP = $this->ReadPropertyString("IPAddress");
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, 'http://'.$IP.'/capture');
@@ -259,7 +266,7 @@
 
 	public function StartStream()
 	{
-		If ($this->ReadPropertyBoolean("Open") == true) {
+		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
 			$IP = $this->ReadPropertyString("IPAddress");
 			$this->SetValue("Stream", '<img src="http://'.$IP.':81/stream">');
 		}
@@ -267,10 +274,28 @@
 
 	public function StopStream()
 	{
-		If ($this->ReadPropertyBoolean("Open") == true) {
+		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
 			$this->SetValue("Stream", "");
 		}
 	} 
+
+	private function ConnectionTest()
+	{
+	      $result = false;
+	      If (Sys_Ping($this->ReadPropertyString("IPAddress"), 100)) {
+			If ($this->GetStatus() <> 102) {
+				$this->SetStatus(102);
+			}
+		      	$result = true;
+		      	$this->SetValue("State", 0);
+		}
+		else {
+			IPS_LogMessage("ESP32Cam","IP ".$this->ReadPropertyString("IPAddress")." reagiert nicht!");
+			$this->SendDebug("ConnectionTest", "IP ".$this->ReadPropertyString("IPAddress")." reagiert nicht!", 0);
+			$this->SetValue("State", 1);
+		}
+	return $result;
+	}
 	    
 	private function RegisterMediaObject($Name, $Ident, $Typ, $Parent, $Position, $Cached, $Filename)
 	{
