@@ -74,10 +74,10 @@
 		// Statusvariablen
 		$this->RegisterVariableInteger("State", "Status", "ESP32Cam.State", 5);
 
-		$this->RegisterVariableBoolean("GetCapture", "Bild erstellen", "", 7);
+		$this->RegisterVariableBoolean("GetCapture", "Bild erstellen", "~Switch", 7);
 		$this->EnableAction("GetCapture");
 
-		$this->RegisterVariableBoolean("GetStream", "Stream", "", 9);
+		$this->RegisterVariableBoolean("GetStream", "Stream", "~Switch", 9);
 		$this->EnableAction("GetStream");
 		
 		$this->RegisterVariableInteger("xclk", "XCLK MHz", "", 10);
