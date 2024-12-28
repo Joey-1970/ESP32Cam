@@ -167,7 +167,7 @@
 		$this->RegisterVariableBoolean("aec2", "AEC DSP", "~Switch", 120);
 		$this->EnableAction("aec2");
 
-		$this->RegisterVariableInteger("ae_level", "ae_level", "ESP32Cam.AELevel", 130);
+		$this->RegisterVariableInteger("ae_level", "AE Level", "ESP32Cam.AELevel", 130);
 		$this->EnableAction("ae_level");
 
 		$this->RegisterVariableBoolean("agc", "AGC", "~Switch", 140);
@@ -272,12 +272,88 @@
 				$this->SetValue($Ident, false);
 			}
 			break;
+		case "framesize":
+			$this->SetState("framesize", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
 		case "quality":
 			$this->SetState("quality", $Value);
 			$this->SetValue($Ident, $Value);
 			break;
+		case "brightness":
+			$this->SetState("brightness", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "contrast":
+			$this->SetState("contrast", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "saturation":
+			$this->SetState("saturation", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "special_effect":
+			$this->SetState("special_effect", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "awb":
+			$this->SetState("awb", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "awb_gain":
+			$this->SetState("awb_gain", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
 		case "wb_mode":
 			$this->SetState("wb_mode", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "aec":
+			$this->SetState("aec", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "aec2":
+			$this->SetState("aec2", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "ae_level":
+			$this->SetState("ae_level", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "agc":
+			$this->SetState("agc", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "gainceiling":
+			$this->SetState("gainceiling", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "bpc":
+			$this->SetState("bpc", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "wpc":
+			$this->SetState("wpc", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "raw_gma":
+			$this->SetState("raw_gma", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "lenc":
+			$this->SetState("lenc", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "hmirror":
+			$this->SetState("hmirror", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "dcw":
+			$this->SetState("dcw", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "colorbar":
+			$this->SetState("colorbar", $Value);
 			$this->SetValue($Ident, $Value);
 			break;
 		case "led_intensity":
