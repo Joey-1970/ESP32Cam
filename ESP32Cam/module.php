@@ -91,6 +91,12 @@
 
 		$this->RegisterProfileInteger("ESP32Cam.Saturation", "Image", "", "", -2, 2, 1);
 		$this->RegisterProfileInteger("ESP32Cam.SaturationOV3660", "Image", "", "", -4, 4, 1);
+
+		$this->RegisterProfileInteger("ESP32Cam.AELevel", "Image", "", "", -2, 2, 1);
+
+		$this->RegisterProfileInteger("ESP32Cam.GainCeiling", "Image", "", "", 0, 6, 1);
+		$this->RegisterProfileInteger("ESP32Cam.GainCeilingOV2640", "Image", "", "", 2, 128, 1);
+		$this->RegisterProfileInteger("ESP32Cam.GainCeilingOV3660", "Image", "", "", 0, 511, 1);
 		
 		// Statusvariablen
 		$this->RegisterVariableInteger("State", "Status", "ESP32Cam.State", 5);
@@ -161,13 +167,19 @@
 		$this->RegisterVariableBoolean("aec2", "AEC DSP", "", 120);
 		$this->EnableAction("aec2");
 
-		$this->RegisterVariableInteger("ae_level", "ae_level", "", 130);
+		$this->RegisterVariableInteger("ae_level", "ae_level", "ESP32Cam.AELevel", 130);
 		$this->EnableAction("ae_level");
 
 		$this->RegisterVariableBoolean("agc", "AGC", "", 140);
 		$this->EnableAction("agc");
 
-   		$this->RegisterVariableInteger("gainceiling", "Gain Ceiling", "", 150);
+		If ($this->ReadPropertyInteger("CamType") == 0) {
+			$this->RegisterVariableInteger("gainceiling", "Gain Ceiling", "ESP32Cam.GainCeiling", 150);
+		} elseif ($this->ReadPropertyInteger("CamType") == 1) {
+			$this->RegisterVariableInteger("gainceiling", "Gain Ceiling", "ESP32Cam.GainCeilingOV2640", 150);
+		} elseif ($this->ReadPropertyInteger("CamType") == 2) {
+			$this->RegisterVariableInteger("gainceiling", "Gain Ceiling", "ESP32Cam.GainCeilingOV3660", 150);
+		}
 		$this->EnableAction("gainceiling");
 
 		$this->RegisterVariableBoolean("bpc", "BPC", "", 160);
