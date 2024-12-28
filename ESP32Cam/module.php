@@ -201,21 +201,25 @@
 	{
 		switch($Ident) {
 		case "GetCapture":
-			$this->SetValue("GetCapture", true);
+			$this->SetValue($Ident, true);
 			$this->GetCapture();
-			$this->SetValue("GetCapture", false);
+			$this->SetValue($Ident, false);
 			break;
 		case "GetStream":
 			If ($Value == true) {
 				$this->StartStream();
-				$this->SetValue("GetStream", true);
+				$this->SetValue($Ident, true);
 			}
 			else {
 				$this->StopStream();
-				$this->SetValue("GetStream", false);
+				$this->SetValue($Ident, false);
 			}
 			break;
-	
+		case "quality":
+			$this->SetState("quality", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+			
 		default:
 		    throw new Exception("Invalid Ident");
 		}
@@ -265,6 +269,24 @@
 		}
 	}
 
+	public function SetState(String $Variable, int $Value)
+	{
+		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
+			$IP = $this->ReadPropertyString("IPAddress");
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, 'http://'.$IP.'/control?var='.$Variable.'&val='.$Value);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			$Result = curl_exec($ch);
+			curl_close($ch);
+			
+			If ($Result === false) {
+				$this->SendDebug("SetState", "Fehler beim Status-Update", 0);
+			}
+			$this->GetState();
+		}
+	} 
+
+	    
 	public function GetCapture()
 	{
 		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
