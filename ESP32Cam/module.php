@@ -72,7 +72,7 @@
 		IPS_SetVariableProfileAssociation("ESP32Cam.WBMode", 4, "Home", "Image", -1);
 		
 		// Statusvariablen
-		$this->RegisterVariableBoolean("State", "Status", "ESP32Cam.State", 5);
+		$this->RegisterVariableInteger("State", "Status", "ESP32Cam.State", 5);
 		
 		$this->RegisterVariableInteger("xclk", "XCLK MHz", "", 10);
 		$this->EnableAction("xclk");
