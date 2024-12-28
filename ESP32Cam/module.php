@@ -152,25 +152,25 @@
 		$this->RegisterVariableInteger("special_effect", "Special Effect", "ESP32Cam.SpecialEffect", 70);
 		$this->EnableAction("special_effect");
 
-		$this->RegisterVariableBoolean("awb", "AWB", "", 80);
+		$this->RegisterVariableBoolean("awb", "AWB", "~Switch", 80);
 		$this->EnableAction("awb");
     
-    		$this->RegisterVariableBoolean("awb_gain", "AWB Gain", "", 90);
+    		$this->RegisterVariableBoolean("awb_gain", "AWB Gain", "~Switch", 90);
 		$this->EnableAction("awb_gain");
 
 		$this->RegisterVariableInteger("wb_mode", "WB Mode", "ESP32Cam.WBMode", 100);
 		$this->EnableAction("wb_mode");
 
-		$this->RegisterVariableBoolean("aec", "AEC Sensor", "", 110);
+		$this->RegisterVariableBoolean("aec", "AEC Sensor", "~Switch", 110);
 		$this->EnableAction("aec");
 
-		$this->RegisterVariableBoolean("aec2", "AEC DSP", "", 120);
+		$this->RegisterVariableBoolean("aec2", "AEC DSP", "~Switch", 120);
 		$this->EnableAction("aec2");
 
 		$this->RegisterVariableInteger("ae_level", "ae_level", "ESP32Cam.AELevel", 130);
 		$this->EnableAction("ae_level");
 
-		$this->RegisterVariableBoolean("agc", "AGC", "", 140);
+		$this->RegisterVariableBoolean("agc", "AGC", "~Switch", 140);
 		$this->EnableAction("agc");
 
 		If ($this->ReadPropertyInteger("CamType") == 0) {
@@ -182,27 +182,27 @@
 		}
 		$this->EnableAction("gainceiling");
 
-		$this->RegisterVariableBoolean("bpc", "BPC", "", 160);
+		$this->RegisterVariableBoolean("bpc", "BPC", "~Switch", 160);
 		$this->EnableAction("bpc");
 		
-    		$this->RegisterVariableBoolean("wpc", "WPC", "", 170);
+    		$this->RegisterVariableBoolean("wpc", "WPC", "~Switch", 170);
 		$this->EnableAction("wpc");
 		
-		$this->RegisterVariableBoolean("raw_gma", "Raw GMA", "", 180);
+		$this->RegisterVariableBoolean("raw_gma", "Raw GMA", "~Switch", 180);
 		$this->EnableAction("raw_gma");
 
-		$this->RegisterVariableBoolean("lenc", "Lens Correction", "", 190);
+		$this->RegisterVariableBoolean("lenc", "Lens Correction", "~Switch", 190);
 		$this->EnableAction("lenc");
 
-		$this->RegisterVariableBoolean("hmirror", "H-Mirror", "", 200);
+		$this->RegisterVariableBoolean("hmirror", "H-Mirror", "~Switch", 200);
 		$this->EnableAction("hmirror");
 
 		// V-Flip
 		
-		$this->RegisterVariableBoolean("dcw", "DCW (Downsize EN)", "", 220);
+		$this->RegisterVariableBoolean("dcw", "DCW (Downsize EN)", "~Switch", 220);
 		$this->EnableAction("dcw");
 		
-		$this->RegisterVariableBoolean("colorbar", "Color Bar", "", 230);
+		$this->RegisterVariableBoolean("colorbar", "Color Bar", "~Switch", 230);
 		$this->EnableAction("colorbar");
 
 		$this->RegisterVariableInteger("led_intensity", "LED Intensity", "~Intensity.255", 240);
