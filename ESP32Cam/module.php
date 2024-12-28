@@ -276,6 +276,14 @@
 			$this->SetState("quality", $Value);
 			$this->SetValue($Ident, $Value);
 			break;
+		case "wb_mode":
+			$this->SetState("wb_mode", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "led_intensity":
+			$this->SetState("led_intensity", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
 			
 		default:
 		    throw new Exception("Invalid Ident");
