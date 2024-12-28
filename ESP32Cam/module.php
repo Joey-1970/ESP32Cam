@@ -9,6 +9,7 @@
             	parent::Create();
  	    	$this->RegisterPropertyBoolean("Open", false);
 		$this->RegisterPropertyString("IPAddress", "127.0.0.1");
+		$this->RegisterPropertyBoolean("CamType", 0);
         }
  	
 	public function GetConfigurationForm() 
@@ -21,6 +22,13 @@
 		$arrayElements = array(); 
 		$arrayElements[] = array("name" => "Open", "type" => "CheckBox",  "caption" => "Aktiv"); 
 		$arrayElements[] = array("type" => "ValidationTextBox", "name" => "IPAddress", "caption" => "IP");
+
+		$arrayOptions = array();
+		$arrayOptions[] = array("label" => "Unbekannt", "value" => 0);
+		$arrayOptions[] = array("label" => "OV2640", "value" => 1);
+		$arrayOptions[] = array("label" => "OV3660", "value" => 1);
+		$arrayElements[] = array("type" => "Select", "name" => "CamType", "caption" => "Kamera Typ", "options" => $arrayOptions);
+
  		
 		$arrayActions = array();
 		$arrayActions[] = array("type" => "Label", "label" => "Test Center"); 
@@ -70,6 +78,10 @@
 		IPS_SetVariableProfileAssociation("ESP32Cam.WBMode", 2, "Cloudy", "Image", -1);
 		IPS_SetVariableProfileAssociation("ESP32Cam.WBMode", 3, "Office", "Image", -1);
 		IPS_SetVariableProfileAssociation("ESP32Cam.WBMode", 4, "Home", "Image", -1);
+
+		$this->RegisterProfileInteger("ESP32Cam.Quality", "Image", "", "", 10, 63, 1);
+		$this->RegisterProfileInteger("ESP32Cam.QualityOV2640", "Image", "", "", 4, 63, 1);
+		$this->RegisterProfileInteger("ESP32Cam.QualityOV3660", "Image", "", "", 4, 10, 1);
 		
 		// Statusvariablen
 		$this->RegisterVariableInteger("State", "Status", "ESP32Cam.State", 5);
@@ -85,8 +97,14 @@
 		
 		$this->RegisterVariableInteger("framesize", "Framesize", "ESP32Cam.Framesize", 20);
 		$this->EnableAction("framesize");
-		
-		$this->RegisterVariableInteger("quality", "Quality", "", 30);
+
+		If ($this->ReadPropertyInteger("CamType") == 0) {
+			$this->RegisterVariableInteger("quality", "Quality", "ESP32Cam.Quality", 30);
+		} elseif ($this->ReadPropertyInteger("CamType") == 1) {
+			$this->RegisterVariableInteger("quality", "Quality", "ESP32Cam.QualityOV2640", 30);
+		} elseif ($this->ReadPropertyInteger("CamType") == 2) {
+			$this->RegisterVariableInteger("quality", "Quality", "ESP32Cam.QualityOV3660", 30);
+		}
 		$this->EnableAction("quality");
 
 		$this->RegisterVariableInteger("brightness", "Brightness", "", 40);
