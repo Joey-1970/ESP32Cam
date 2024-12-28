@@ -9,7 +9,7 @@
             	parent::Create();
  	    	$this->RegisterPropertyBoolean("Open", false);
 		$this->RegisterPropertyString("IPAddress", "127.0.0.1");
-		$this->RegisterPropertyBoolean("CamType", 0);
+		$this->RegisterPropertyInteger("CamType", 0);
         }
  	
 	public function GetConfigurationForm() 
