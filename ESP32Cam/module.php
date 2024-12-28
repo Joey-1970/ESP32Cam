@@ -82,6 +82,15 @@
 		$this->RegisterProfileInteger("ESP32Cam.Quality", "Image", "", "", 10, 63, 1);
 		$this->RegisterProfileInteger("ESP32Cam.QualityOV2640", "Image", "", "", 4, 63, 1);
 		$this->RegisterProfileInteger("ESP32Cam.QualityOV3660", "Image", "", "", 4, 10, 1);
+
+		$this->RegisterProfileInteger("ESP32Cam.Brightness", "Image", "", "", -2, 2, 1);
+		$this->RegisterProfileInteger("ESP32Cam.BrightnessOV3660", "Image", "", "", -3, 3, 1);
+
+		$this->RegisterProfileInteger("ESP32Cam.Contrast", "Image", "", "", -2, 2, 1);
+		$this->RegisterProfileInteger("ESP32Cam.ContrastOV3660", "Image", "", "", -3, 3, 1);
+
+		$this->RegisterProfileInteger("ESP32Cam.Saturation", "Image", "", "", -2, 2, 1);
+		$this->RegisterProfileInteger("ESP32Cam.SaturationOV3660", "Image", "", "", -4, 4, 1);
 		
 		// Statusvariablen
 		$this->RegisterVariableInteger("State", "Status", "ESP32Cam.State", 5);
@@ -107,13 +116,31 @@
 		}
 		$this->EnableAction("quality");
 
-		$this->RegisterVariableInteger("brightness", "Brightness", "", 40);
+		If ($this->ReadPropertyInteger("CamType") == 0) {
+			$this->RegisterVariableInteger("brightness", "Brightness", "ESP32Cam.Brightness", 40);
+		} elseif ($this->ReadPropertyInteger("CamType") == 1) {
+			$this->RegisterVariableInteger("brightness", "Brightness", "ESP32Cam.Brightness", 40);
+		} elseif ($this->ReadPropertyInteger("CamType") == 2) {
+			$this->RegisterVariableInteger("brightness", "Brightness", "ESP32Cam.BrightnessOV3660", 40);
+		}
 		$this->EnableAction("brightness");
 
-		$this->RegisterVariableInteger("contrast", "Contrast", "", 50);
+		If ($this->ReadPropertyInteger("CamType") == 0) {
+			$this->RegisterVariableInteger("contrast", "Contrast", "ESP32Cam.Contrast", 50);
+		} elseif ($this->ReadPropertyInteger("CamType") == 1) {
+			$this->RegisterVariableInteger("contrast", "Contrast", "ESP32Cam.Contrast", 50);
+		} elseif ($this->ReadPropertyInteger("CamType") == 2) {
+			$this->RegisterVariableInteger("contrast", "Contrast", "ESP32Cam.ContrastOV3660", 50);
+		}
 		$this->EnableAction("contrast");
 
-		$this->RegisterVariableInteger("saturation", "Saturation", "", 60);
+		If ($this->ReadPropertyInteger("CamType") == 0) {
+			$this->RegisterVariableInteger("saturation", "Saturation", "ESP32Cam.Saturation", 60);
+		} elseif ($this->ReadPropertyInteger("CamType") == 1) {
+			$this->RegisterVariableInteger("saturation", "Saturation", "ESP32Cam.Saturation", 60);
+		} elseif ($this->ReadPropertyInteger("CamType") == 2) {
+			$this->RegisterVariableInteger("saturation", "Saturation", "SaturationOV3660", 60);
+		}
 		$this->EnableAction("saturation");
 
 		$this->RegisterVariableInteger("special_effect", "Special Effect", "ESP32Cam.SpecialEffect", 70);
