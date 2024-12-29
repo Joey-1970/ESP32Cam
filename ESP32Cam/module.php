@@ -197,7 +197,8 @@
 		$this->RegisterVariableBoolean("hmirror", "H-Mirror", "~Switch", 200);
 		$this->EnableAction("hmirror");
 
-		// V-Flip
+		$this->RegisterVariableBoolean("vflip", "H-V-Flip", "~Switch", 210);
+		$this->EnableAction("vflip");
 		
 		$this->RegisterVariableBoolean("dcw", "DCW (Downsize EN)", "~Switch", 220);
 		$this->EnableAction("dcw");
@@ -346,6 +347,10 @@
 			break;
 		case "hmirror":
 			$this->SetState("hmirror", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "vflip":
+			$this->SetState("vflip", $Value);
 			$this->SetValue($Ident, $Value);
 			break;
 		case "dcw":
