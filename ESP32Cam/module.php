@@ -197,7 +197,7 @@
 		$this->RegisterVariableBoolean("hmirror", "H-Mirror", "~Switch", 200);
 		$this->EnableAction("hmirror");
 
-		$this->RegisterVariableBoolean("vflip", "H-V-Flip", "~Switch", 210);
+		$this->RegisterVariableBoolean("vflip", "V-Flip", "~Switch", 210);
 		$this->EnableAction("vflip");
 		
 		$this->RegisterVariableBoolean("dcw", "DCW (Downsize EN)", "~Switch", 220);
