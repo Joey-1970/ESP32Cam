@@ -408,6 +408,9 @@
 				$this->SetValue("raw_gma", $Data->{'raw_gma'});
 				$this->SetValue("lenc", $Data->{'lenc'});
 				$this->SetValue("hmirror", $Data->{'hmirror'});
+				If (isset($Data->{'vflip'})) { // Die Variable wird nicht immer mitgeliefert
+					$this->SetValue("vflip", $Data->{'vflip'});
+				}
 				$this->SetValue("dcw", $Data->{'dcw'});
 				$this->SetValue("colorbar", $Data->{'colorbar'});
 				$this->SetValue("led_intensity", $Data->{'led_intensity'});
