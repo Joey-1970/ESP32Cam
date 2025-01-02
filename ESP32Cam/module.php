@@ -482,7 +482,7 @@
 		}
 	} 
 
-	private function ConnectionTest()
+	public function ConnectionTest()
 	{
 	      $result = false;
 	      If (Sys_Ping($this->ReadPropertyString("IPAddress"), 100)) {
