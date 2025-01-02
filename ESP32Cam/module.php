@@ -10,6 +10,8 @@
  	    	$this->RegisterPropertyBoolean("Open", false);
 		$this->RegisterPropertyString("IPAddress", "127.0.0.1");
 		$this->RegisterPropertyInteger("CamType", 0);
+		$this->RegisterTimer("ConnectionTest", 0, 'ESP32Cam_ConnectionTest($_IPS["TARGET"]);');
+
         }
  	
 	public function GetConfigurationForm() 
@@ -18,6 +20,8 @@
 		$arrayStatus[] = array("code" => 101, "icon" => "inactive", "caption" => "Instanz wird erstellt"); 
 		$arrayStatus[] = array("code" => 102, "icon" => "active", "caption" => "Instanz ist aktiv");
 		$arrayStatus[] = array("code" => 104, "icon" => "inactive", "caption" => "Instanz ist inaktiv");
+		$arrayStatus[] = array("code" => 202, "icon" => "error", "caption" => "Kommunikationfehler!");
+
 				
 		$arrayElements = array(); 
 		$arrayElements[] = array("name" => "Open", "type" => "CheckBox",  "caption" => "Aktiv"); 
@@ -238,21 +242,27 @@
 		$this->RegisterVariableString("Stream", "Stream", "~HTMLBox", 310);
 		
     
-		
-		
-		If ($this->HasActiveParent() == true) {	
-			If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
-				If ($this->GetStatus() <> 102) {
-					$this->SetStatus(102);
-				}
-				$this->GetState();
+		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
+			If ($this->GetStatus() <> 102) {
+				$this->SetStatus(102);
 			}
-			else {
-				If ($this->GetStatus() <> 104) {
-					$this->SetStatus(104);
-				}
-			}
+			$this->GetState();
+			$this->SetTimerInterval("ConnectionTest", 1000));
 		}
+		elseif (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == false)) {
+			If ($this->GetStatus() <> 202) {
+				$this->SetStatus(202);
+			}
+			$this->GetState();
+			$this->SetTimerInterval("ConnectionTest", 1000));
+		}
+		else {
+			If ($this->GetStatus() <> 104) {
+				$this->SetStatus(104);
+			}
+			$this->SetTimerInterval("ConnectionTest", 0));
+		}
+		
 	}
 
 	public function RequestAction($Ident, $Value) 
@@ -486,6 +496,9 @@
 			IPS_LogMessage("ESP32Cam","IP ".$this->ReadPropertyString("IPAddress")." reagiert nicht!");
 			$this->SendDebug("ConnectionTest", "IP ".$this->ReadPropertyString("IPAddress")." reagiert nicht!", 0);
 			$this->SetValue("State", 1);
+			If ($this->GetStatus() <> 202) {
+				$this->SetStatus(202);
+			}
 		}
 	return $result;
 	}
