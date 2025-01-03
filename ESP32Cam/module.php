@@ -103,6 +103,8 @@
 		$this->RegisterProfileInteger("ESP32Cam.GainCeilingOV3660", "Image", "", "", 0, 511, 1);
 		
 		// Statusvariablen
+		$this->RegisterVariableInteger("LastUpdate", "Letztes Update", "~UnixTimestamp", 2);
+		
 		$this->RegisterVariableInteger("State", "Status", "ESP32Cam.State", 5);
 
 		$this->RegisterVariableBoolean("GetCapture", "Bild erstellen", "~Switch", 7);
@@ -254,7 +256,7 @@
 				$this->SetStatus(202);
 			}
 			$this->GetState();
-			$this->SetTimerInterval("ConnectionTest", 1000);
+			$this->SetTimerInterval("ConnectionTest", 30 * 1000);
 		}
 		else {
 			If ($this->GetStatus() <> 104) {
@@ -398,32 +400,34 @@
 			else {
 				$this->SendDebug("GetState", $Result, 0);
                     		$Data = json_decode($Result);
-				$this->SetValue("xclk", $Data->{'xclk'});
-				$this->SetValue("framesize", $Data->{'framesize'});
-                    		$this->SetValue("quality", $Data->{'quality'});
-				$this->SetValue("brightness", $Data->{'brightness'});
-				$this->SetValue("contrast", $Data->{'contrast'});
-				$this->SetValue("saturation", $Data->{'saturation'});
-				$this->SetValue("special_effect", $Data->{'special_effect'});
-				$this->SetValue("awb", $Data->{'awb'});
-				$this->SetValue("awb_gain", $Data->{'awb_gain'});
-				$this->SetValue("wb_mode", $Data->{'wb_mode'});
-				$this->SetValue("aec", $Data->{'aec'});
-				$this->SetValue("aec2", $Data->{'aec2'});
-				$this->SetValue("ae_level", $Data->{'ae_level'});
-				$this->SetValue("agc", $Data->{'agc'});
-				$this->SetValue("gainceiling", $Data->{'gainceiling'});
-				$this->SetValue("bpc", $Data->{'bpc'});
-				$this->SetValue("wpc", $Data->{'wpc'});
-				$this->SetValue("raw_gma", $Data->{'raw_gma'});
-				$this->SetValue("lenc", $Data->{'lenc'});
-				$this->SetValue("hmirror", $Data->{'hmirror'});
+				$this->SetValueWhenChanged("xclk", $Data->{'xclk'});
+				$this->SetValueWhenChanged("framesize", $Data->{'framesize'});
+                    		$this->SetValueWhenChanged("quality", $Data->{'quality'});
+				$this->SetValueWhenChanged("brightness", $Data->{'brightness'});
+				$this->SetValueWhenChanged("contrast", $Data->{'contrast'});
+				$this->SetValueWhenChanged("saturation", $Data->{'saturation'});
+				$this->SetValueWhenChanged("special_effect", $Data->{'special_effect'});
+				$this->SetValueWhenChanged("awb", $Data->{'awb'});
+				$this->SetValueWhenChanged("awb_gain", $Data->{'awb_gain'});
+				$this->SetValueWhenChanged("wb_mode", $Data->{'wb_mode'});
+				$this->SetValueWhenChanged("aec", $Data->{'aec'});
+				$this->SetValueWhenChanged("aec2", $Data->{'aec2'});
+				$this->SetValueWhenChanged("ae_level", $Data->{'ae_level'});
+				$this->SetValueWhenChanged("agc", $Data->{'agc'});
+				$this->SetValueWhenChanged("gainceiling", $Data->{'gainceiling'});
+				$this->SetValueWhenChanged("bpc", $Data->{'bpc'});
+				$this->SetValueWhenChanged("wpc", $Data->{'wpc'});
+				$this->SetValueWhenChanged("raw_gma", $Data->{'raw_gma'});
+				$this->SetValueWhenChanged("lenc", $Data->{'lenc'});
+				$this->SetValueWhenChanged("hmirror", $Data->{'hmirror'});
 				If (isset($Data->{'vflip'})) { // Die Variable wird nicht immer mitgeliefert
-					$this->SetValue("vflip", $Data->{'vflip'});
+					$this->SetValueWhenChanged("vflip", $Data->{'vflip'});
 				}
-				$this->SetValue("dcw", $Data->{'dcw'});
-				$this->SetValue("colorbar", $Data->{'colorbar'});
-				$this->SetValue("led_intensity", $Data->{'led_intensity'});
+				$this->SetValueWhenChanged("dcw", $Data->{'dcw'});
+				$this->SetValueWhenChanged("colorbar", $Data->{'colorbar'});
+				$this->SetValueWhenChanged("led_intensity", $Data->{'led_intensity'});
+
+				$this->SetValueWhenChanged("LastUpdate", time() );
 			}	
 		}
 	}
@@ -502,6 +506,13 @@
 		}
 	return $result;
 	}
+
+	private function SetValueWhenChanged($Ident, $Value)
+    	{
+        	if ($this->GetValue($Ident) != $Value) {
+            		$this->SetValue($Ident, $Value);
+        	}
+    	}    
 	    
 	private function RegisterMediaObject($Name, $Ident, $Typ, $Parent, $Position, $Cached, $Filename)
 	{
