@@ -489,7 +489,7 @@
 	public function ConnectionTest()
 	{
 	      $result = false;
-	      If (Sys_Ping($this->ReadPropertyString("IPAddress"), 500)) {
+	      If (Sys_Ping($this->ReadPropertyString("IPAddress"), 1000)) {
 			If ($this->GetStatus() <> 102) {
 				$this->SetStatus(102);
 			}
