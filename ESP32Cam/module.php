@@ -249,7 +249,7 @@
 				$this->SetStatus(102);
 			}
 			$this->GetState();
-			$this->SetTimerInterval("ConnectionTest", 1000);
+			$this->SetTimerInterval("ConnectionTest", 30 * 1000);
 		}
 		elseif (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == false)) {
 			If ($this->GetStatus() <> 202) {
