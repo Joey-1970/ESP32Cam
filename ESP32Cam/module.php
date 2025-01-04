@@ -10,7 +10,7 @@
  	    	$this->RegisterPropertyBoolean("Open", false);
 		$this->RegisterPropertyString("IPAddress", "127.0.0.1");
 		$this->RegisterPropertyInteger("CamType", 0);
-		$this->RegisterTimer("ConnectionTest", 0, 'ESP32Cam_ConnectionTest($_IPS["TARGET"]);');
+		$this->RegisterTimer("ConnectionTest", 0, 'ESP32Cam_GetState($_IPS["TARGET"]);');
 		$this->RegisterAttributeString("Preference", ""); 
 
         }
@@ -477,6 +477,7 @@
 	public function StartStream()
 	{
 		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
+			$this->SendDebug("StartStream", "Ausfuehrung", 0);
 			$IP = $this->ReadPropertyString("IPAddress");
 			$this->SetValue("Stream", '<img src="http://'.$IP.':81/stream">');
 
@@ -487,12 +488,34 @@
 	public function StopStream()
 	{
 		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
+			$this->SendDebug("StopStream", "Ausfuehrung", 0);
 			$this->SetValue("Stream", "");
 
 			$this->GetState();
 		}
 	} 
 
+	public function SetPreference()
+	{
+		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
+			$this->SendDebug("SetPreference", "Ausfuehrung", 0);
+			$PreferenceArray = array();
+			$PreferenceArray = ("framesize" => $this->GetValue("framesize") );
+			$this->SendDebug("SetPreference", serialize($PreferenceArray), 0);
+			$this->WriteAttributeString("Preference", serialize($PreferenceArray));
+		}
+	} 
+
+	public function GetPreference()
+	{
+		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
+			$this->SendDebug("GetPreference", "Ausfuehrung", 0);
+			$PreferenceArray = array();
+			$PreferenceArray = unserialize($this->ReadAttributeString("Preference"));
+			
+		}
+	} 
+	    
 	public function ConnectionTest()
 	{
 	      $result = false;
