@@ -11,7 +11,38 @@
 		$this->RegisterPropertyString("IPAddress", "127.0.0.1");
 		$this->RegisterPropertyInteger("CamType", 0);
 		$this->RegisterTimer("ConnectionTest", 0, 'ESP32Cam_GetState($_IPS["TARGET"]);');
-		$this->RegisterAttributeString("Preference", ""); 
+		{"0xd3":8,"0x111":0,"0x132":9,"xclk":20,"pixformat":4,"framesize":9,"quality":10,"brightness":0,"contrast":0,"saturation":0,"sharpness":0,
+			"special_effect":0,"wb_mode":0,"awb":1,"awb_gain":1,"aec":1,"aec2":0,"ae_level":0,"aec_value":168,"agc":1,"agc_gain":0,"gainceiling":0,
+			"bpc":0,"wpc":1,"raw_gma":1,"lenc":1,"hmirror":0,"vflip":0,"dcw":1,"colorbar":0,"led_intensity":0}
+		
+		$PreferenceArray = array();
+		$PreferenceArray = array("framesize" => 8, 
+					"quality" => 10, 
+					"brightness" => 0, 
+					"contrast" => 0, 
+					"saturation" => 0,
+					"special_effect" => 0,
+					"awb" => 0,
+					"awb_gain" => 0,
+					"wb_mode" => 0,
+					"aec" => 1,
+					"aec2" => 0,
+					"ae_level" => 0,
+					"agc" => 1,
+					"gainceiling" => 0,
+					"bpc" => 0,
+					"wpc" => 1,
+					"raw_gma" => 1,
+					"lenc" => 1,
+					"hmirror" => 0,
+					"vflip" => 0,
+					"dcw" => 1,
+					"colorbar" => 0,
+					"led_intensity" => 0);
+		
+		$this->RegisterAttributeString("Preference", serialize($PreferenceArray)); 
+		$this->RegisterPropertyBoolean("PreferenceReloadAfterStart", false);
+		$this->RegisterPropertyBoolean("PreferenceReloadAfterOffline", false);
 
         }
  	
@@ -34,7 +65,9 @@
 		$arrayOptions[] = array("label" => "OV3660", "value" => 1);
 		$arrayElements[] = array("type" => "Select", "name" => "CamType", "caption" => "Kamera Typ", "options" => $arrayOptions);
 
- 		
+ 		$arrayElements[] = array("name" => "PreferenceReloadAfterStart", "type" => "CheckBox",  "caption" => "Einstellungen nach Restart laden"); 
+		$arrayElements[] = array("name" => "PreferenceReloadAfterOffline", "type" => "CheckBox",  "caption" => "Einstellungen nach Offline laden"); 
+		
 		$arrayActions = array();
 		$arrayActions[] = array("type" => "Label", "label" => "Test Center"); 
 		$arrayActions[] = array("type" => "TestCenter", "name" => "TestCenter");
@@ -256,6 +289,9 @@
 				$this->SetStatus(102);
 			}
 			$this->GetState();
+			If ($this->ReadPropertyBoolean("PreferenceReloadAfterStart") == true)  {
+				$this->GetPreference();
+			}
 			$this->SetTimerInterval("ConnectionTest", 30 * 1000);
 		}
 		elseif (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == false)) {
@@ -579,6 +615,9 @@
 	      If (Sys_Ping($this->ReadPropertyString("IPAddress"), 1000)) {
 			If ($this->GetStatus() <> 102) {
 				$this->SetStatus(102);
+				If ($this->ReadPropertyBoolean("PreferenceReloadAfterOffline") == true)  {
+					$this->GetPreference();
+				}
 			}
 		      	$result = true;
 		      	$this->SetValue("State", 0);
