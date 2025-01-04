@@ -510,7 +510,29 @@
 		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
 			$this->SendDebug("SetPreference", "Ausfuehrung", 0);
 			$PreferenceArray = array();
-			$PreferenceArray = array("framesize" => $this->GetValue("framesize") );
+			$PreferenceArray = array("framesize" => $this->GetValue("framesize"), 
+						"quality" => $this->GetValue("quality"), 
+						"brightness" => $this->GetValue("brightness"), 
+						"contrast" => $this->GetValue("contrast"), 
+						"saturation" => $this->GetValue("saturation"),
+						"special_effect" => $this->GetValue("special_effect"),
+						"awb" => $this->GetValue("awb"),
+						"awb_gain" => $this->GetValue("awb_gain"),
+						"wb_mode" => $this->GetValue("wb_mode"),
+						"aec" => $this->GetValue("aec"),
+						"aec2" => $this->GetValue("aec2"),
+						"ae_level" => $this->GetValue("ae_level"),
+						"agc" => $this->GetValue("agc"),
+						"gainceiling" => $this->GetValue("gainceiling"),
+						"bpc" => $this->GetValue("bpc"),
+						"wpc" => $this->GetValue("wpc"),
+						"raw_gma" => $this->GetValue("raw_gma"),
+						"lenc" => $this->GetValue("lenc"),
+						"hmirror" => $this->GetValue("hmirror"),
+						"vflip" => $this->GetValue("vflip"),
+						"dcw" => $this->GetValue("dcw"),
+						"colorbar" => $this->GetValue("colorbar"),
+						"led_intensity" => $this->GetValue("led_intensity"));
 			$this->SendDebug("SetPreference", serialize($PreferenceArray), 0);
 			$this->WriteAttributeString("Preference", serialize($PreferenceArray));
 		}
@@ -522,8 +544,19 @@
 			$this->SendDebug("GetPreference", "Ausfuehrung", 0);
 			$PreferenceArray = array();
 			$PreferenceArray = unserialize($this->ReadAttributeString("Preference"));
-			$this->SendDebug("GetPreference", "Framesize: ".$PreferenceArray["framesize"], 0);
-			//$this->SetValueWhenChanged("framesize", $Data->{'framesize'});
+			//$this->SendDebug("GetPreference", "Framesize: ".$PreferenceArray["framesize"], 0);
+			
+			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
+			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
+			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
+			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
+			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
+			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
+			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
+			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
+			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
+			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
+			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
 		}
 	} 
 	    
