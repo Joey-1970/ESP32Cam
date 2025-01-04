@@ -292,6 +292,16 @@
 				$this->SetValue($Ident, false);
 			}
 			break;
+		case "SetPreference":
+			$this->SetValue($Ident, true);
+			$this->SetPreference();
+			$this->SetValue($Ident, false);
+			break;
+		case "GetPreference":
+			$this->SetValue($Ident, true);
+			$this->GetPreference();
+			$this->SetValue($Ident, false);
+			break;
 		case "framesize":
 			$this->SetState("framesize", $Value);
 			$this->SetValue($Ident, $Value);
@@ -512,7 +522,8 @@
 			$this->SendDebug("GetPreference", "Ausfuehrung", 0);
 			$PreferenceArray = array();
 			$PreferenceArray = unserialize($this->ReadAttributeString("Preference"));
-			
+			$this->SendDebug("GetPreference", "Framesize: ".$PreferenceArray["framesize"], 0);
+			//$this->SetValueWhenChanged("framesize", $Data->{'framesize'});
 		}
 	} 
 	    
