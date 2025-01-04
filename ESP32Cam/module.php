@@ -548,17 +548,28 @@
 			
 			$this->RequestActionWhenChanged("framesize", $PreferenceArray["framesize"]);
 			$this->RequestActionWhenChanged("quality", $PreferenceArray["quality"]);
-			/*
-			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
-			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
-			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
-			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
-			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
-			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
-			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
-			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
-			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
-			*/
+			$this->RequestActionWhenChanged("brightness", $PreferenceArray["brightness"]);
+			$this->RequestActionWhenChanged("contrast", $PreferenceArray["contrast"]);
+			$this->RequestActionWhenChanged("saturation", $PreferenceArray["saturation"]);
+			$this->RequestActionWhenChanged("special_effect", $PreferenceArray["special_effect"]);
+			$this->RequestActionWhenChanged("awb", $PreferenceArray["awb"]);
+			$this->RequestActionWhenChanged("awb_gain", $PreferenceArray["awb_gain"]);
+			$this->RequestActionWhenChanged("wb_mode", $PreferenceArray["wb_mode"]);
+			$this->RequestActionWhenChanged("aec", $PreferenceArray["aec"]);
+			$this->RequestActionWhenChanged("aec2", $PreferenceArray["aec2"]);
+			$this->RequestActionWhenChanged("ae_level", $PreferenceArray["ae_level"]);
+			$this->RequestActionWhenChanged("agc", $PreferenceArray["agc"]);
+			$this->RequestActionWhenChanged("gainceiling", $PreferenceArray["gainceiling"]);
+			$this->RequestActionWhenChanged("bpc", $PreferenceArray["bpc"]);
+			$this->RequestActionWhenChanged("wpc", $PreferenceArray["wpc"]);
+			$this->RequestActionWhenChanged("raw_gma", $PreferenceArray["raw_gma"]);
+			$this->RequestActionWhenChanged("lenc", $PreferenceArray["lenc"]);
+			$this->RequestActionWhenChanged("hmirror", $PreferenceArray["hmirror"]);
+			$this->RequestActionWhenChanged("vflip", $PreferenceArray["vflip"]);
+			$this->RequestActionWhenChanged("dcw", $PreferenceArray["dcw"]);
+			$this->RequestActionWhenChanged("colorbar", $PreferenceArray["colorbar"]);
+			$this->RequestActionWhenChanged("led_intensity", $PreferenceArray["led_intensity"]);
+			
 		}
 	} 
 	    
