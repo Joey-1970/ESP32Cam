@@ -11,10 +11,6 @@
 		$this->RegisterPropertyString("IPAddress", "127.0.0.1");
 		$this->RegisterPropertyInteger("CamType", 0);
 		$this->RegisterTimer("ConnectionTest", 0, 'ESP32Cam_GetState($_IPS["TARGET"]);');
-		{"0xd3":8,"0x111":0,"0x132":9,"xclk":20,"pixformat":4,"framesize":9,"quality":10,"brightness":0,"contrast":0,"saturation":0,"sharpness":0,
-			"special_effect":0,"wb_mode":0,"awb":1,"awb_gain":1,"aec":1,"aec2":0,"ae_level":0,"aec_value":168,"agc":1,"agc_gain":0,"gainceiling":0,
-			"bpc":0,"wpc":1,"raw_gma":1,"lenc":1,"hmirror":0,"vflip":0,"dcw":1,"colorbar":0,"led_intensity":0}
-		
 		$PreferenceArray = array();
 		$PreferenceArray = array("framesize" => 8, 
 					"quality" => 10, 
