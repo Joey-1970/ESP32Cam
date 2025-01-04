@@ -547,6 +547,8 @@
 			//$this->SendDebug("GetPreference", "Framesize: ".$PreferenceArray["framesize"], 0);
 			
 			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
+			$this->SetValueWhenChanged("quality", $PreferenceArray["quality"]);
+			/*
 			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
 			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
 			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
@@ -556,7 +558,7 @@
 			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
 			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
 			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
-			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
+			*/
 		}
 	} 
 	    
