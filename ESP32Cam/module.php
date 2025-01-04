@@ -11,6 +11,7 @@
 		$this->RegisterPropertyString("IPAddress", "127.0.0.1");
 		$this->RegisterPropertyInteger("CamType", 0);
 		$this->RegisterTimer("ConnectionTest", 0, 'ESP32Cam_ConnectionTest($_IPS["TARGET"]);');
+		$this->RegisterAttributeString("Preference", ""); 
 
         }
  	
@@ -103,116 +104,122 @@
 		$this->RegisterProfileInteger("ESP32Cam.GainCeilingOV3660", "Image", "", "", 0, 511, 1);
 		
 		// Statusvariablen
-		$this->RegisterVariableInteger("LastUpdate", "Letztes Update", "~UnixTimestamp", 2);
+		$this->RegisterVariableInteger("LastUpdate", "Letztes Update", "~UnixTimestamp", 10);
 		
-		$this->RegisterVariableInteger("State", "Status", "ESP32Cam.State", 5);
+		$this->RegisterVariableInteger("State", "Status", "ESP32Cam.State", 20);
 
-		$this->RegisterVariableBoolean("GetCapture", "Bild erstellen", "~Switch", 7);
+		$this->RegisterVariableBoolean("GetCapture", "Bild erstellen", "~Switch", 30);
 		$this->EnableAction("GetCapture");
 
-		$this->RegisterVariableBoolean("GetStream", "Stream", "~Switch", 9);
+		$this->RegisterVariableBoolean("GetStream", "Stream", "~Switch", 40);
 		$this->EnableAction("GetStream");
+
+		$this->RegisterVariableBoolean("SetPreference", "Set Preference", "~Switch", 50);
+		$this->EnableAction("SetPreference");
+
+		$this->RegisterVariableBoolean("GetPreference", "Get Preference", "~Switch", 60);
+		$this->EnableAction("GetPreference");
 		
-		$this->RegisterVariableInteger("xclk", "XCLK MHz", "", 10);
+		$this->RegisterVariableInteger("xclk", "XCLK MHz", "", 70);
 		$this->EnableAction("xclk");
 		
-		$this->RegisterVariableInteger("framesize", "Framesize", "ESP32Cam.Framesize", 20);
+		$this->RegisterVariableInteger("framesize", "Framesize", "ESP32Cam.Framesize", 80);
 		$this->EnableAction("framesize");
 
 		If ($this->ReadPropertyInteger("CamType") == 0) {
-			$this->RegisterVariableInteger("quality", "Quality", "ESP32Cam.Quality", 30);
+			$this->RegisterVariableInteger("quality", "Quality", "ESP32Cam.Quality", 90);
 		} elseif ($this->ReadPropertyInteger("CamType") == 1) {
-			$this->RegisterVariableInteger("quality", "Quality", "ESP32Cam.QualityOV2640", 30);
+			$this->RegisterVariableInteger("quality", "Quality", "ESP32Cam.QualityOV2640", 90);
 		} elseif ($this->ReadPropertyInteger("CamType") == 2) {
-			$this->RegisterVariableInteger("quality", "Quality", "ESP32Cam.QualityOV3660", 30);
+			$this->RegisterVariableInteger("quality", "Quality", "ESP32Cam.QualityOV3660", 90);
 		}
 		$this->EnableAction("quality");
 
 		If ($this->ReadPropertyInteger("CamType") == 0) {
-			$this->RegisterVariableInteger("brightness", "Brightness", "ESP32Cam.Brightness", 40);
+			$this->RegisterVariableInteger("brightness", "Brightness", "ESP32Cam.Brightness", 100);
 		} elseif ($this->ReadPropertyInteger("CamType") == 1) {
-			$this->RegisterVariableInteger("brightness", "Brightness", "ESP32Cam.Brightness", 40);
+			$this->RegisterVariableInteger("brightness", "Brightness", "ESP32Cam.Brightness", 100);
 		} elseif ($this->ReadPropertyInteger("CamType") == 2) {
-			$this->RegisterVariableInteger("brightness", "Brightness", "ESP32Cam.BrightnessOV3660", 40);
+			$this->RegisterVariableInteger("brightness", "Brightness", "ESP32Cam.BrightnessOV3660", 100);
 		}
 		$this->EnableAction("brightness");
 
 		If ($this->ReadPropertyInteger("CamType") == 0) {
-			$this->RegisterVariableInteger("contrast", "Contrast", "ESP32Cam.Contrast", 50);
+			$this->RegisterVariableInteger("contrast", "Contrast", "ESP32Cam.Contrast", 110);
 		} elseif ($this->ReadPropertyInteger("CamType") == 1) {
-			$this->RegisterVariableInteger("contrast", "Contrast", "ESP32Cam.Contrast", 50);
+			$this->RegisterVariableInteger("contrast", "Contrast", "ESP32Cam.Contrast", 110);
 		} elseif ($this->ReadPropertyInteger("CamType") == 2) {
-			$this->RegisterVariableInteger("contrast", "Contrast", "ESP32Cam.ContrastOV3660", 50);
+			$this->RegisterVariableInteger("contrast", "Contrast", "ESP32Cam.ContrastOV3660", 110);
 		}
 		$this->EnableAction("contrast");
 
 		If ($this->ReadPropertyInteger("CamType") == 0) {
-			$this->RegisterVariableInteger("saturation", "Saturation", "ESP32Cam.Saturation", 60);
+			$this->RegisterVariableInteger("saturation", "Saturation", "ESP32Cam.Saturation", 120);
 		} elseif ($this->ReadPropertyInteger("CamType") == 1) {
-			$this->RegisterVariableInteger("saturation", "Saturation", "ESP32Cam.Saturation", 60);
+			$this->RegisterVariableInteger("saturation", "Saturation", "ESP32Cam.Saturation", 120);
 		} elseif ($this->ReadPropertyInteger("CamType") == 2) {
-			$this->RegisterVariableInteger("saturation", "Saturation", "SaturationOV3660", 60);
+			$this->RegisterVariableInteger("saturation", "Saturation", "SaturationOV3660", 120);
 		}
 		$this->EnableAction("saturation");
 
-		$this->RegisterVariableInteger("special_effect", "Special Effect", "ESP32Cam.SpecialEffect", 70);
+		$this->RegisterVariableInteger("special_effect", "Special Effect", "ESP32Cam.SpecialEffect", 130);
 		$this->EnableAction("special_effect");
 
-		$this->RegisterVariableBoolean("awb", "AWB", "~Switch", 80);
+		$this->RegisterVariableBoolean("awb", "AWB", "~Switch", 140);
 		$this->EnableAction("awb");
     
-    		$this->RegisterVariableBoolean("awb_gain", "AWB Gain", "~Switch", 90);
+    		$this->RegisterVariableBoolean("awb_gain", "AWB Gain", "~Switch", 150);
 		$this->EnableAction("awb_gain");
 
-		$this->RegisterVariableInteger("wb_mode", "WB Mode", "ESP32Cam.WBMode", 100);
+		$this->RegisterVariableInteger("wb_mode", "WB Mode", "ESP32Cam.WBMode", 160);
 		$this->EnableAction("wb_mode");
 
-		$this->RegisterVariableBoolean("aec", "AEC Sensor", "~Switch", 110);
+		$this->RegisterVariableBoolean("aec", "AEC Sensor", "~Switch", 170);
 		$this->EnableAction("aec");
 
-		$this->RegisterVariableBoolean("aec2", "AEC DSP", "~Switch", 120);
+		$this->RegisterVariableBoolean("aec2", "AEC DSP", "~Switch", 180);
 		$this->EnableAction("aec2");
 
-		$this->RegisterVariableInteger("ae_level", "AE Level", "ESP32Cam.AELevel", 130);
+		$this->RegisterVariableInteger("ae_level", "AE Level", "ESP32Cam.AELevel", 190);
 		$this->EnableAction("ae_level");
 
-		$this->RegisterVariableBoolean("agc", "AGC", "~Switch", 140);
+		$this->RegisterVariableBoolean("agc", "AGC", "~Switch", 200);
 		$this->EnableAction("agc");
 
 		If ($this->ReadPropertyInteger("CamType") == 0) {
-			$this->RegisterVariableInteger("gainceiling", "Gain Ceiling", "ESP32Cam.GainCeiling", 150);
+			$this->RegisterVariableInteger("gainceiling", "Gain Ceiling", "ESP32Cam.GainCeiling", 210);
 		} elseif ($this->ReadPropertyInteger("CamType") == 1) {
-			$this->RegisterVariableInteger("gainceiling", "Gain Ceiling", "ESP32Cam.GainCeilingOV2640", 150);
+			$this->RegisterVariableInteger("gainceiling", "Gain Ceiling", "ESP32Cam.GainCeilingOV2640", 210);
 		} elseif ($this->ReadPropertyInteger("CamType") == 2) {
-			$this->RegisterVariableInteger("gainceiling", "Gain Ceiling", "ESP32Cam.GainCeilingOV3660", 150);
+			$this->RegisterVariableInteger("gainceiling", "Gain Ceiling", "ESP32Cam.GainCeilingOV3660", 210);
 		}
 		$this->EnableAction("gainceiling");
 
-		$this->RegisterVariableBoolean("bpc", "BPC", "~Switch", 160);
+		$this->RegisterVariableBoolean("bpc", "BPC", "~Switch", 220);
 		$this->EnableAction("bpc");
 		
-    		$this->RegisterVariableBoolean("wpc", "WPC", "~Switch", 170);
+    		$this->RegisterVariableBoolean("wpc", "WPC", "~Switch", 230);
 		$this->EnableAction("wpc");
 		
-		$this->RegisterVariableBoolean("raw_gma", "Raw GMA", "~Switch", 180);
+		$this->RegisterVariableBoolean("raw_gma", "Raw GMA", "~Switch", 240);
 		$this->EnableAction("raw_gma");
 
-		$this->RegisterVariableBoolean("lenc", "Lens Correction", "~Switch", 190);
+		$this->RegisterVariableBoolean("lenc", "Lens Correction", "~Switch", 250);
 		$this->EnableAction("lenc");
 
-		$this->RegisterVariableBoolean("hmirror", "H-Mirror", "~Switch", 200);
+		$this->RegisterVariableBoolean("hmirror", "H-Mirror", "~Switch", 260);
 		$this->EnableAction("hmirror");
 
-		$this->RegisterVariableBoolean("vflip", "V-Flip", "~Switch", 210);
+		$this->RegisterVariableBoolean("vflip", "V-Flip", "~Switch", 270);
 		$this->EnableAction("vflip");
 		
-		$this->RegisterVariableBoolean("dcw", "DCW (Downsize EN)", "~Switch", 220);
+		$this->RegisterVariableBoolean("dcw", "DCW (Downsize EN)", "~Switch", 280);
 		$this->EnableAction("dcw");
 		
-		$this->RegisterVariableBoolean("colorbar", "Color Bar", "~Switch", 230);
+		$this->RegisterVariableBoolean("colorbar", "Color Bar", "~Switch", 290);
 		$this->EnableAction("colorbar");
 
-		$this->RegisterVariableInteger("led_intensity", "LED Intensity", "~Intensity.255", 240);
+		$this->RegisterVariableInteger("led_intensity", "LED Intensity", "~Intensity.255", 300);
 		$this->EnableAction("led_intensity");
     
 
