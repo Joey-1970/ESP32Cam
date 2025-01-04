@@ -114,10 +114,10 @@
 		$this->RegisterVariableBoolean("GetStream", "Stream", "~Switch", 40);
 		$this->EnableAction("GetStream");
 
-		$this->RegisterVariableBoolean("SetPreference", "Set Preference", "~Switch", 50);
+		$this->RegisterVariableBoolean("SetPreference", "Einstellungen sichern", "~Switch", 50);
 		$this->EnableAction("SetPreference");
 
-		$this->RegisterVariableBoolean("GetPreference", "Get Preference", "~Switch", 60);
+		$this->RegisterVariableBoolean("GetPreference", "Einstellungen wiederherstellen", "~Switch", 60);
 		$this->EnableAction("GetPreference");
 		
 		$this->RegisterVariableInteger("xclk", "XCLK MHz", "", 70);
