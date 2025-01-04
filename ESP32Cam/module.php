@@ -500,7 +500,7 @@
 		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
 			$this->SendDebug("SetPreference", "Ausfuehrung", 0);
 			$PreferenceArray = array();
-			$PreferenceArray = ("framesize" => $this->GetValue("framesize") );
+			$PreferenceArray = array("framesize" => $this->GetValue("framesize") );
 			$this->SendDebug("SetPreference", serialize($PreferenceArray), 0);
 			$this->WriteAttributeString("Preference", serialize($PreferenceArray));
 		}
