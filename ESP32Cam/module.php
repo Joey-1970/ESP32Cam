@@ -546,8 +546,8 @@
 			$PreferenceArray = unserialize($this->ReadAttributeString("Preference"));
 			//$this->SendDebug("GetPreference", "Framesize: ".$PreferenceArray["framesize"], 0);
 			
-			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
-			$this->SetValueWhenChanged("quality", $PreferenceArray["quality"]);
+			$this->RequestActionWhenChanged("framesize", $PreferenceArray["framesize"]);
+			$this->RequestActionWhenChanged("quality", $PreferenceArray["quality"]);
 			/*
 			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
 			$this->SetValueWhenChanged("framesize", $PreferenceArray["framesize"]);
@@ -583,6 +583,14 @@
 	return $result;
 	}
 
+	private function RequestActionWhenChanged($Ident, $Value)
+    	{
+        	if ($this->GetValue($Ident) != $Value) {
+            		$this->RequestAction($Ident, $Value);
+			$this->SendDebug("RequestActionWhenChanged", "Variable ".$Ident." wurde auf Wert ".$Value." gesetzt", 0);
+        	}
+    	}    
+	    
 	private function SetValueWhenChanged($Ident, $Value)
     	{
         	if ($this->GetValue($Ident) != $Value) {
