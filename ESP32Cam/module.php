@@ -2,6 +2,11 @@
     // Klassendefinition
     class ESP32Cam extends IPSModule 
     { 
+	// https://github.com/espressif/esp32-camera/blob/master/driver/include/sensor.h
+	// https://github.com/easytarget/esp32-cam-webserver/blob/master/API.md
+	// https://makesmart.net/blog/read/esp32-cam-programmieren-die-einrichtung-als-livestream-server#zus%C3%A4tzliche-informationen
+	// https://www.jf-elektronik.de/esp32-cam-einrichten/
+	    
 	// Überschreibt die interne IPS_Create($id) Funktion
         public function Create() 
         {
@@ -127,10 +132,25 @@
 		$this->RegisterProfileInteger("ESP32Cam.SaturationOV3660", "Image", "", "", -4, 4, 1);
 
 		$this->RegisterProfileInteger("ESP32Cam.AELevel", "Image", "", "", -2, 2, 1);
-
+		
 		$this->RegisterProfileInteger("ESP32Cam.GainCeiling", "Image", "", "", 0, 6, 1);
-		$this->RegisterProfileInteger("ESP32Cam.GainCeilingOV2640", "Image", "", "", 2, 128, 1);
-		$this->RegisterProfileInteger("ESP32Cam.GainCeilingOV3660", "Image", "", "", 0, 511, 1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeiling", 0, "2x", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeiling", 1, "4x", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeiling", 2, "8x", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeiling", 3, "16x", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeiling", 4, "32x", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeiling", 5, "64x", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeiling", 6, "128x", "Image", -1);
+
+		$this->RegisterProfileInteger("ESP32Cam.GainCeilingOV3660", "Image", "", "", 0, 7, 1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeilingOV3660", 0, "2x", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeilingOV3660", 1, "4x", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeilingOV3660", 2, "8x", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeilingOV3660", 3, "16x", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeilingOV3660", 4, "32x", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeilingOV3660", 5, "64x", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeilingOV3660", 6, "128x", "Image", -1);
+		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeilingOV3660", 7, "256x", "Image", -1);
 		
 		// Statusvariablen
 		$this->RegisterVariableInteger("LastUpdate", "Letztes Update", "~UnixTimestamp", 10);
@@ -218,7 +238,7 @@
 		If ($this->ReadPropertyInteger("CamType") == 0) {
 			$this->RegisterVariableInteger("gainceiling", "Gain Ceiling", "ESP32Cam.GainCeiling", 210);
 		} elseif ($this->ReadPropertyInteger("CamType") == 1) {
-			$this->RegisterVariableInteger("gainceiling", "Gain Ceiling", "ESP32Cam.GainCeilingOV2640", 210);
+			$this->RegisterVariableInteger("gainceiling", "Gain Ceiling", "ESP32Cam.GainCeiling", 210);
 		} elseif ($this->ReadPropertyInteger("CamType") == 2) {
 			$this->RegisterVariableInteger("gainceiling", "Gain Ceiling", "ESP32Cam.GainCeilingOV3660", 210);
 		}
