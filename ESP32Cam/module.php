@@ -234,7 +234,7 @@
 		$this->RegisterVariableBoolean("aec2", "AEC DSP", "~Switch", 180);
 		$this->EnableAction("aec2");
 
-		$this->RegisterVariableInteger("aec_value", "aec_value", "ESP32Cam.AECValue", 185); // 0 bis 1200
+		$this->RegisterVariableInteger("aec_value", "AEC Value", "ESP32Cam.AECValue", 185); // 0 bis 1200
 		$this->EnableAction("aec_value");
 
 		$this->RegisterVariableInteger("ae_level", "AE Level", "ESP32Cam.AELevel", 190);
