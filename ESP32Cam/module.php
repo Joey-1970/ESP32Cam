@@ -28,8 +28,10 @@
 					"wb_mode" => 0,
 					"aec" => 1,
 					"aec2" => 0,
+					"aec_value" => 0,
 					"ae_level" => 0,
 					"agc" => 1,
+					"agc_gain" => 0,
 					"gainceiling" => 0,
 					"bpc" => 0,
 					"wpc" => 1,
@@ -132,6 +134,10 @@
 		$this->RegisterProfileInteger("ESP32Cam.SaturationOV3660", "Image", "", "", -4, 4, 1);
 
 		$this->RegisterProfileInteger("ESP32Cam.AELevel", "Image", "", "", -2, 2, 1);
+
+		$this->RegisterProfileInteger("ESP32Cam.AECValue", "Image", "", "", 0, 1200, 1);
+
+		$this->RegisterProfileInteger("ESP32Cam.AGCGain", "Image", "", "", 0, 30, 1);
 		
 		$this->RegisterProfileInteger("ESP32Cam.GainCeiling", "Image", "", "", 0, 6, 0);
 		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeiling", 0, "2x", "Image", -1);
@@ -170,7 +176,6 @@
 		$this->EnableAction("GetPreference");
 		
 		$this->RegisterVariableInteger("xclk", "XCLK MHz", "", 70);
-		$this->EnableAction("xclk");
 		
 		$this->RegisterVariableInteger("framesize", "Framesize", "ESP32Cam.Framesize", 80);
 		$this->EnableAction("framesize");
@@ -229,11 +234,17 @@
 		$this->RegisterVariableBoolean("aec2", "AEC DSP", "~Switch", 180);
 		$this->EnableAction("aec2");
 
+		$this->RegisterVariableInteger("aec_value", "aec_value", "ESP32Cam.AECValue", 185); // 0 bis 1200
+		$this->EnableAction("aec_value");
+
 		$this->RegisterVariableInteger("ae_level", "AE Level", "ESP32Cam.AELevel", 190);
 		$this->EnableAction("ae_level");
 
 		$this->RegisterVariableBoolean("agc", "AGC", "~Switch", 200);
 		$this->EnableAction("agc");
+
+		$this->RegisterVariableInteger("agc_gain", "AGC Gain", "ESP32Cam.AGCGain", 205); // 0 bis 30
+		$this->EnableAction("agc_gain");
 
 		If ($this->ReadPropertyInteger("CamType") == 0) {
 			$this->RegisterVariableInteger("gainceiling", "Gain Ceiling", "ESP32Cam.GainCeiling", 210);
@@ -288,11 +299,6 @@
 		$this->RegisterVariableInteger("sharpness", "Sharpness", "", 110);
 		$this->EnableAction("sharpness");
 
-    		$this->RegisterVariableInteger("aec_value", "aec_value", "", 110);
-		$this->EnableAction("aec_value");
-
-    		$this->RegisterVariableInteger("agc_gain", "AGC Gain", "", 110);
-		$this->EnableAction("agc_gain");
     		*/
 		
 		$this->RegisterMediaObject("Capture", "Capture_".$this->InstanceID, 1, $this->InstanceID, 300, true, "Capture.jpg");
@@ -398,11 +404,19 @@
 			$this->SetState("aec2", $Value);
 			$this->SetValue($Ident, $Value);
 			break;
+		case "aec_value":
+			$this->SetState("aec2", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
 		case "ae_level":
 			$this->SetState("ae_level", $Value);
 			$this->SetValue($Ident, $Value);
 			break;
 		case "agc":
+			$this->SetState("agc", $Value);
+			$this->SetValue($Ident, $Value);
+			break;
+		case "agc_gain":
 			$this->SetState("agc", $Value);
 			$this->SetValue($Ident, $Value);
 			break;
@@ -481,8 +495,10 @@
 				$this->SetValueWhenChanged("wb_mode", $Data->{'wb_mode'});
 				$this->SetValueWhenChanged("aec", $Data->{'aec'});
 				$this->SetValueWhenChanged("aec2", $Data->{'aec2'});
+				$this->SetValueWhenChanged("aec_value", $Data->{'aec_value'});
 				$this->SetValueWhenChanged("ae_level", $Data->{'ae_level'});
 				$this->SetValueWhenChanged("agc", $Data->{'agc'});
+				$this->SetValueWhenChanged("agc_gain", $Data->{'agc_gain'});
 				$this->SetValueWhenChanged("gainceiling", $Data->{'gainceiling'});
 				$this->SetValueWhenChanged("bpc", $Data->{'bpc'});
 				$this->SetValueWhenChanged("wpc", $Data->{'wpc'});
@@ -573,6 +589,7 @@
 						"wb_mode" => $this->GetValue("wb_mode"),
 						"aec" => $this->GetValue("aec"),
 						"aec2" => $this->GetValue("aec2"),
+						"aec_level" => $this->GetValue("aec_level"),
 						"ae_level" => $this->GetValue("ae_level"),
 						"agc" => $this->GetValue("agc"),
 						"gainceiling" => $this->GetValue("gainceiling"),
@@ -609,8 +626,11 @@
 			$this->RequestActionWhenChanged("wb_mode", $PreferenceArray["wb_mode"]);
 			$this->RequestActionWhenChanged("aec", $PreferenceArray["aec"]);
 			$this->RequestActionWhenChanged("aec2", $PreferenceArray["aec2"]);
+			$this->RequestActionWhenChanged("aec_level", $PreferenceArray["aec_level"]);
+			$this->RequestActionWhenChanged("aec_gain", $PreferenceArray["aec_gain"]);
 			$this->RequestActionWhenChanged("ae_level", $PreferenceArray["ae_level"]);
 			$this->RequestActionWhenChanged("agc", $PreferenceArray["agc"]);
+			$this->RequestActionWhenChanged("agc_gain", $PreferenceArray["agc_gain"]);
 			$this->RequestActionWhenChanged("gainceiling", $PreferenceArray["gainceiling"]);
 			$this->RequestActionWhenChanged("bpc", $PreferenceArray["bpc"]);
 			$this->RequestActionWhenChanged("wpc", $PreferenceArray["wpc"]);
