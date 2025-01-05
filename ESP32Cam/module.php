@@ -133,7 +133,7 @@
 
 		$this->RegisterProfileInteger("ESP32Cam.AELevel", "Image", "", "", -2, 2, 1);
 		
-		$this->RegisterProfileInteger("ESP32Cam.GainCeiling", "Image", "", "", 0, 6, 1);
+		$this->RegisterProfileInteger("ESP32Cam.GainCeiling", "Image", "", "", 0, 6, 0);
 		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeiling", 0, "2x", "Image", -1);
 		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeiling", 1, "4x", "Image", -1);
 		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeiling", 2, "8x", "Image", -1);
@@ -142,7 +142,7 @@
 		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeiling", 5, "64x", "Image", -1);
 		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeiling", 6, "128x", "Image", -1);
 
-		$this->RegisterProfileInteger("ESP32Cam.GainCeilingOV3660", "Image", "", "", 0, 7, 1);
+		$this->RegisterProfileInteger("ESP32Cam.GainCeilingOV3660", "Image", "", "", 0, 7, 0);
 		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeilingOV3660", 0, "2x", "Image", -1);
 		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeilingOV3660", 1, "4x", "Image", -1);
 		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeilingOV3660", 2, "8x", "Image", -1);
