@@ -589,9 +589,10 @@
 						"wb_mode" => $this->GetValue("wb_mode"),
 						"aec" => $this->GetValue("aec"),
 						"aec2" => $this->GetValue("aec2"),
-						"aec_level" => $this->GetValue("aec_level"),
+						"aec_value" => $this->GetValue("aec_value"),
 						"ae_level" => $this->GetValue("ae_level"),
 						"agc" => $this->GetValue("agc"),
+						"agc_gain" => $this->GetValue("agc_gain"),
 						"gainceiling" => $this->GetValue("gainceiling"),
 						"bpc" => $this->GetValue("bpc"),
 						"wpc" => $this->GetValue("wpc"),
@@ -626,8 +627,7 @@
 			$this->RequestActionWhenChanged("wb_mode", $PreferenceArray["wb_mode"]);
 			$this->RequestActionWhenChanged("aec", $PreferenceArray["aec"]);
 			$this->RequestActionWhenChanged("aec2", $PreferenceArray["aec2"]);
-			$this->RequestActionWhenChanged("aec_level", $PreferenceArray["aec_level"]);
-			$this->RequestActionWhenChanged("aec_gain", $PreferenceArray["aec_gain"]);
+			$this->RequestActionWhenChanged("aec_value", $PreferenceArray["aec_value"]);
 			$this->RequestActionWhenChanged("ae_level", $PreferenceArray["ae_level"]);
 			$this->RequestActionWhenChanged("agc", $PreferenceArray["agc"]);
 			$this->RequestActionWhenChanged("agc_gain", $PreferenceArray["agc_gain"]);
