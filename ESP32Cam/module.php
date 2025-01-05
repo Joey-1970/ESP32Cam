@@ -118,20 +118,20 @@
 		IPS_SetVariableProfileAssociation("ESP32Cam.WBMode", 3, "Office", "Image", -1);
 		IPS_SetVariableProfileAssociation("ESP32Cam.WBMode", 4, "Home", "Image", -1);
 
-		$this->RegisterProfileInteger("ESP32Cam.Quality", "Image", "", "", 10, 63, 0);
-		$this->RegisterProfileInteger("ESP32Cam.QualityOV2640", "Image", "", "", 4, 63, 0);
-		$this->RegisterProfileInteger("ESP32Cam.QualityOV3660", "Image", "", "", 4, 10, 0);
+		$this->RegisterProfileInteger("ESP32Cam.Quality", "Image", "", "", 10, 63, 1);
+		$this->RegisterProfileInteger("ESP32Cam.QualityOV2640", "Image", "", "", 4, 63, 1);
+		$this->RegisterProfileInteger("ESP32Cam.QualityOV3660", "Image", "", "", 4, 10, 1);
 
-		$this->RegisterProfileInteger("ESP32Cam.Brightness", "Image", "", "", -2, 2, 0);
-		$this->RegisterProfileInteger("ESP32Cam.BrightnessOV3660", "Image", "", "", -3, 3, 0);
+		$this->RegisterProfileInteger("ESP32Cam.Brightness", "Image", "", "", -2, 2, 1);
+		$this->RegisterProfileInteger("ESP32Cam.BrightnessOV3660", "Image", "", "", -3, 3, 1);
 
-		$this->RegisterProfileInteger("ESP32Cam.Contrast", "Image", "", "", -2, 2, 0);
-		$this->RegisterProfileInteger("ESP32Cam.ContrastOV3660", "Image", "", "", -3, 3, 0);
+		$this->RegisterProfileInteger("ESP32Cam.Contrast", "Image", "", "", -2, 2, 1);
+		$this->RegisterProfileInteger("ESP32Cam.ContrastOV3660", "Image", "", "", -3, 3, 1);
 
-		$this->RegisterProfileInteger("ESP32Cam.Saturation", "Image", "", "", -2, 2, 0);
-		$this->RegisterProfileInteger("ESP32Cam.SaturationOV3660", "Image", "", "", -4, 4, 0);
+		$this->RegisterProfileInteger("ESP32Cam.Saturation", "Image", "", "", -2, 2, 1);
+		$this->RegisterProfileInteger("ESP32Cam.SaturationOV3660", "Image", "", "", -4, 4, 1);
 
-		$this->RegisterProfileInteger("ESP32Cam.AELevel", "Image", "", "", -2, 2, 0);
+		$this->RegisterProfileInteger("ESP32Cam.AELevel", "Image", "", "", -2, 2, 1);
 		
 		$this->RegisterProfileInteger("ESP32Cam.GainCeiling", "Image", "", "", 0, 6, 0);
 		IPS_SetVariableProfileAssociation("ESP32Cam.GainCeiling", 0, "2x", "Image", -1);
